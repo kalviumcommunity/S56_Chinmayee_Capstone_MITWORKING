@@ -1,0 +1,95 @@
+.signup-page{
+    display: flex;
+    background-color: rgba(46, 46, 46, 1);
+}
+
+.signup-div{
+    width: 65vw;
+    height: 99.4vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.signup-form{
+    background: rgba(237, 234, 229, 1);
+    width: 32vw;
+    height: 80vh;
+    border-radius: 0.4rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 4vh;
+    margin-left: 7vw;
+}
+
+.signup-title{
+    color: rgba(59, 58, 54, 1);
+    font-size: 1.8rem;
+}
+
+.signup-input-box{
+    position: relative;
+    width: 23vw;
+}
+
+.signup-input-box input{
+    width: 21vw;
+    padding: 0.6rem;
+    border: 1px solid rgba(59, 58, 54, 1);
+    background-color: rgba(237, 234, 229, 1);
+    border-radius: 0.3rem;
+    outline: none;
+    color: rgba(59, 58, 54, 1);
+    transition: 0.5s ease;
+}
+
+.signup-input-box span{
+    position: absolute;
+    left: 0.6vw;
+    padding: 0.68rem;
+    pointer-events: none;
+    font-size: 0.75rem;
+    color: rgba(59, 58, 54, 1);
+    text-transform: uppercase;
+    transition: 0.5s ease;
+}
+
+.signup-input-box input:valid ~ span,
+.signup-input-box input:focus ~ span{
+    color: rgba(59, 58, 54, 1);
+    transform: translateX(10px) translateY(-7px);
+    font-size: 0.7rem;
+    padding: 0 0.6rem;
+    background: rgba(237, 234, 229, 1);
+    border-left: 1px solid rgba(59, 58, 54, 1);
+    border-right: 1px solid rgba(59, 58, 54, 1);
+}
+
+.signup-input-box input:focus{
+    border: 3px solid rgba(59, 58, 54, 1);
+}
+
+.signup-btn{
+    width: 11vw;
+    height: 6vh;
+    letter-spacing: 3px;
+    color: rgba(237, 234, 229, 1);
+    background-color: rgba(46, 46, 46, 1);
+    font-style: normal;
+    border: 0;
+    font-size: 0.9rem;
+    transition: 0.5s ease;
+}
+
+.signup-btn:hover{
+    transform: scale(1.1);
+}
+
+
+.login-text{
+    font-size: 0.9rem;
+    font-weight: lighter;
+    color: #000;
+}
