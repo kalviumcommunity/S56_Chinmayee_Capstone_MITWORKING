@@ -21,6 +21,7 @@
     align-items: center;
     flex-direction: column;
     gap: 4vh;
+    margin-left: 7vw;
 }
 
 .signup-title{
@@ -67,7 +68,7 @@
 }
 
 .signup-input-box input:focus{
-    border: 2px solid rgba(59, 58, 54, 1);
+    border: 3px solid rgba(59, 58, 54, 1);
 }
 
 .signup-btn{

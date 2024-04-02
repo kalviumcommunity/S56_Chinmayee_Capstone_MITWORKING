@@ -17,7 +17,7 @@ export default function Signup() {
                     <span>Username</span>
                 </div>
                 <div className='signup-input-box'>
-                    <input className='signup-password-input' type="email" required="required" />
+                    <input className='signup-password-input' type="text" required="required" />
                     <span>Email</span>
                 </div>
                 <div className='signup-input-box'>
