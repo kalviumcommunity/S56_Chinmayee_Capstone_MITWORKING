@@ -18,16 +18,16 @@
     display: flex;
     justify-content: center;
     position: absolute;
-    bottom: 10px; 
+    bottom: 1.5vh; 
     left: 20vw;
 }
 
 .dot{
-    width: 10px;
-    height: 10px;
+    width: 0.9vw;
+    height: 0.9vw;
     background-color: rgba(100, 100, 100, 1);
-    border-radius: 50px;
-    margin: 0 5px;
+    border-radius: 50%;
+    margin: 0 0.4vw;
     cursor: pointer;
 }
 
@@ -47,7 +47,7 @@
     background: rgba(237, 234, 229, 1);
     width: 30vw;
     height: 70vh;
-    border-radius: 6px;
+    border-radius: 0.4rem;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -57,7 +57,7 @@
 
 .login-title{
     color: rgba(59, 58, 54, 1);
-    font-size: 25px;
+    font-size: 1.8rem;
 }
 
 .input-box{
@@ -67,10 +67,10 @@
 
 .input-box input{
     width: 21vw;
-    padding: 10px;
+    padding: 0.6rem;
     border: 1px solid rgba(59, 58, 54, 1);
     background-color: rgba(237, 234, 229, 1);
-    border-radius: 5px;
+    border-radius: 0.3rem;
     outline: none;
     color: rgba(59, 58, 54, 1);
     transition: 0.5s ease;
@@ -79,9 +79,9 @@
 .input-box span{
     position: absolute;
     left: 0.6vw;
-    padding: 11px;
+    padding: 0.68rem;
     pointer-events: none;
-    font-size: 12px;
+    font-size: 0.75rem;
     color: rgba(59, 58, 54, 1);
     text-transform: uppercase;
     transition: 0.5s ease;
@@ -91,8 +91,8 @@
 .input-box input:focus ~ span{
     color: rgba(59, 58, 54, 1);
     transform: translateX(10px) translateY(-7px);
-    font-size: 10px;
-    padding: 0 10px;
+    font-size: 0.7rem;
+    padding: 0 0.6rem;
     background: rgba(237, 234, 229, 1);
     border-left: 1px solid rgba(59, 58, 54, 1);
     border-right: 1px solid rgba(59, 58, 54, 1);
@@ -109,8 +109,8 @@
     color: rgba(237, 234, 229, 1);
     background-color: rgba(46, 46, 46, 1);
     font-style: normal;
-    border: 0px;
-    font-size: 15px;
+    border: 0;
+    font-size: 0.9rem;
     transition: 0.5s ease;
 }
 
@@ -120,7 +120,7 @@
 
 
 .signup-text{
-    font-size: 15px;
+    font-size: 0.9rem;
     font-weight: lighter;
     color: #000;
 }

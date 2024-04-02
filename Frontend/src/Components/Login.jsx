@@ -38,7 +38,7 @@ export default function Login() {
                     <span>Username</span>
                 </div>
                 <div className='input-box'>
-                    <input className='password-input' type="text" required="required" />
+                    <input className='password-input' type="password" required="required" />
                     <span>Password</span>
                 </div>
 
