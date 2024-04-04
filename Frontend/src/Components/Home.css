@@ -4,44 +4,58 @@
     margin: 0;
     padding: 0;
     font-family: "Inria Sans", sans-serif;
+    animation: fadeIn 2s ease-out;
+}
+
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+        transform: translateY(-50px); 
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 .home-box{
-    background-color: rgba(46, 46, 46, 1);
-    width: 100vw;
+    max-width: 100vw;
     height: fit-content;
 }
 
 .search-box{
-    margin: 2vh 0 0 34vw;
+    margin: 2vh 0 4vh 0;
     width: 25vw;
     height: 6vh;
     border: 0px;
     font-size: 15px;
     text-align: center;
     border-radius: 4px;
+    border: 2px solid rgba(228, 222, 222, 1);
+    color: rgba(59, 58, 54, 1);
+    outline: none;
 }
+
 
 /* Posts card */
 
 .posts-container{
-    margin:2vh 0 0 22vw;
-    width: 50vw;
+    margin-left: 22vw;
+    width: 47vw;
     height: fit-content;
     display: flex;
     flex-direction: column;
     align-items: center;
+    border: 2px solid rgba(228, 222, 222, 1);
 }
 
 .post{
-    width: 40vw;
+    max-width: 47vw;
     height: 70vh;
-    margin-top: 5vh;
-    border-radius: 4px;
-    background-color: rgba(237, 234, 229, 1);
     display: flex;
     align-items: center;
     flex-direction: column;
+    border: 2px solid rgba(228, 222, 222, 1);
 }
 
 .post-img{
@@ -86,25 +100,27 @@
 .post-caption{
     font-size: 15px;
     font-weight: lighter;
+    margin-left: 0.5vw;
 }
 
 /* Profile card */
 
 .profile-card{
     width: 21vw;
-    height: 43vh;
+    height: 50vh;
     position: fixed;
     top: 2vh;
-    right: 2vw;
-    background-color: rgba(237, 234, 229, 1);
+    right: 5vw;    
+    border: 2px solid rgba(59, 58, 54, 1);
     border-radius: 6px;
+    box-shadow: 2px 2px 2px rgb(179, 176, 176);
 }
 
 .prf-img{
     width: 60px;
     height: 60px;
     border-radius: 50px;
-    margin: 6vh 0 0 8vw;
+    margin: 6vh 0 1vh 8vw;
 }
 
 .prf-name{
@@ -121,7 +137,7 @@
 .lines{
     width: 19vw;
     height: 12vh;
-    margin: 2vh 0 0 2vh;
+    margin: 5vh 0 0 2vh;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -138,7 +154,7 @@
     text-align: center;
     position: absolute;
     right: 13vw;
-    top: 28vh;
+    top: 31vh;
     font-size: 14px;
 }
 
@@ -152,7 +168,7 @@
     text-align: center;
     position: absolute;
     right: 3vw;
-    top: 28vh;
+    top: 31vh;
     font-size: 14px;
 }
 
@@ -163,12 +179,14 @@
 }
 
 .prf-btn{
+    border: 1px solid red;
     width: 21vw;
-    height: 6.6vh;
+    height: 8vh;
     border-radius: 0 0 6px 6px;
     font-size: 14px;
     font-weight: bold;
     color: rgba(59, 58, 54, 1);
-    background-color: rgba(237, 234, 229, 1);
+    margin-top: 1.7vh;
+    background-color: rgb(255 255 255);
     border: 0;
 }
