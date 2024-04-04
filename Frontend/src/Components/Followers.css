@@ -2,13 +2,13 @@
     width: 23vw;
     height: 50vh;
     position: fixed;
-    bottom: 0;
-    right: 0;
+    top: 55vh;
+    right: 3vw;
 }
 
 .heading{
     font-size: 25px;
-    color: rgba(237, 234, 229, 1);
+    color: rgba(59, 58, 54, 1);
 }
 
 .container{
@@ -17,18 +17,18 @@
     justify-content: space-between;
     width: 22vw;
     height: 37vh;
-    margin-top: 5vh;
+    margin-top: 3vh;
 }
 
 .follower{
-    border: 1.5px solid rgba(237, 234, 229, 1);
+    border: 2px solid rgba(59, 58, 54, 1);
     height: 10vh;
     display: flex;
     justify-content: space-around;
     align-items: center;
-    border-radius: 5px;
-    color: rgba(237, 234, 229, 1);
-    background-color: rgba(46, 46, 46, 1);
+    border-radius: 5px;    
+    color: rgba(59, 58, 54, 1);
+    background-color: rgb(255, 255, 255);
 }
 
 .follower-prf{
@@ -42,13 +42,13 @@
 }
 
 .follow{
-    color: rgba(59, 58, 54, 1);
+    color: rgb(255, 255, 255);
     width: 5vw;
     height: 4.5vh;
     font-weight: bold;
     border-radius: 4px;
     border: 0px;
-    background-color: rgba(237, 234, 229, 1);
+    background-color: rgba(59, 58, 54, 1);
     transition: 0.5s ease;
 }
 

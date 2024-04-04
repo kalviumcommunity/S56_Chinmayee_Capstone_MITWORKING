@@ -1,17 +1,18 @@
 .navbar{
-    width: 18vw;
+    width: 21vw;
     height: 99.9vh;
     position: fixed;
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
-    align-items: center;
-    background-color: rgba(237, 234, 229, 1);
+    align-items: start;
+    background-color: rgb(255, 255, 255);
 }
 
 .logo{
     width: 17vw;
     height: 12vh;
+    margin-left: 2vw;
 }
 
 .nav-content{
@@ -19,6 +20,7 @@
     height: 7vh;
     display: flex;
     border-radius: 6px;
+    margin-left: 2vw;
 }
 
 .nav-content:hover{
@@ -37,6 +39,8 @@
     color: rgba(59, 58, 54, 1);
     font-weight: 900;
     font-style: normal;
+    text-decoration: underline;
+    text-decoration-color: rgb(255, 255, 255);
 }
 
 .logout-btn{
@@ -50,6 +54,8 @@
     transition: 0.5s ease;
     border: 0px;
     font-size: 15px;
+    margin-left: 3vw;
+
 }
 
 .logout-btn:hover{

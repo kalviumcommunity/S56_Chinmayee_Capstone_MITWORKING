@@ -8,6 +8,7 @@ import heart from '../assets/heart.png'
 import message from '../assets/messenger.png'
 import share from '../assets/share.png'
 import profile from '../assets/profile3.jpg'
+import { Link } from 'react-router-dom'
 
 
 export default function Home() {
@@ -16,9 +17,9 @@ export default function Home() {
       <div className='home-box'>
         <Navbar/>
         <Followers/>
-        <input className='search-box' placeholder='Search for people' type="text" />
         {/* posts container*/}
         <div className='posts-container'>
+        <input className='search-box' placeholder='Search for people' type="text" />
 
           <div className='post'>
             <img className='post-img' src={post1} alt="post1" />
@@ -70,7 +71,7 @@ export default function Home() {
               <div className='bottom-line'></div>
             </div>
 
-            <button className='prf-btn'>Profile</button>
+           <button className='prf-btn'>Profile</button>
         </div>
 
       </div>
