@@ -14,15 +14,15 @@ export default function Navbar() {
       <nav className='navbar'>
       <Link to={"/home"}><img className='logo' src={logo} alt="logo" /></Link>
 
-        <Link to={"/home"}><div className='nav-content home'>
+        <Link to={"/home"}className='nav-content home'>
             <img className='home-icon icon' src={home} alt="home-icon" />
             <h2 className='nav-text'>Home</h2>
-        </div></Link>
+        </Link>
 
-        <Link to={"/profile"}><div className='nav-content profile'>
+        <Link to={"/profile"} className='nav-content profile'>
             <img className='profile-icon icon' src={profile} alt="profile-icon" />
             <h2 className='nav-text'>Profile</h2>
-        </div></Link>
+        </Link>
 
         <div className='nav-content create-post'>
             <img className='createPost-icon icon' src={edit} alt="post-icon" />
