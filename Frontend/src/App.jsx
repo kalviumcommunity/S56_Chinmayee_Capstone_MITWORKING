@@ -1,10 +1,11 @@
 import React from 'react'
 import './App.css'
-import Home from './Components/Home'
+import Home from './Pages/Home'
 import {BrowserRouter, Routes, Route} from 'react-router-dom'
-import Login from './Components/Login'
-import Signup from './Components/Signup'
-import Profile from './Components/Profile'
+import Login from './Pages/Login'
+import Signup from './Pages/Signup'
+import Profile from './Pages/Profile'
+import UploadPost from './Pages/UploadPost'
 
 
 function App() {
@@ -16,6 +17,7 @@ function App() {
         <Route path='/signup' element={<Signup/>}/>
         <Route path='/home' element={<Home/>}/>
         <Route path='/profile' element={<Profile/>}/>
+        <Route path='/upload' element={<UploadPost/>}/>
       </Routes>
       </BrowserRouter>
   )

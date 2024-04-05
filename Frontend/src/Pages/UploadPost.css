@@ -1,0 +1,123 @@
+.upload-page{
+    max-width: 100vw;
+    height: fit-content;
+}
+
+.upload-div{
+    margin-left: 22vw;
+    width: 47vw;
+    height: fit-content;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+    border: 2px solid rgba(228, 222, 222, 1);
+}
+
+/* Upload form */
+
+.upload-overveiw{
+    width: 41.5vw;
+    height: 25vh;
+    margin: 5vh 20vw;
+    border: 2px solid rgba(59, 58, 54, 1);
+    border-radius: 6px;
+    box-shadow: 2px 2px 2px rgb(179, 176, 176);
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    flex-direction: column;
+}
+
+.upload-input{
+    width: 41.5vw;
+    height: 6vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.upload-prf{
+    border-radius: 50%;
+    width: 45px;
+    height: 45px;
+    margin-right: 1vw;
+}
+
+.upload-input input{
+    width: 25vw;
+    height: 5.5vh;
+    border-radius: 3px;
+    border: 1.5px solid rgba(59, 58, 54, 1);
+    outline: none;
+    text-align: center;
+    color: rgba(59, 58, 54, 1);
+}
+
+.upload-icons{
+    width: 41.5vw;
+    height: 8vh;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+.upload-icons div{
+    width: 7vw;
+    height: 4.5vh;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    transition: 0.5s ease;
+}
+
+.upload-icons div:hover{
+    background-color: rgba(225, 225, 225, 0.518);
+    border-radius: 4px;
+}
+
+.upload-icon{
+    width: 20px;
+    height: 20px;
+}
+
+.upload-icons div h2{
+    font-size: 0.9rem;
+}
+
+.upload-icons button{
+    color: rgb(255, 255, 255);
+    width: 6vw;
+    height: 4.5vh;
+    font-weight: bold;
+    border: 0px;
+    background-color: rgba(59, 58, 54, 1);
+    transition: 0.5s ease;
+    margin: 1vh 0;
+    border-radius: 3px;
+}
+
+.upload-icons button:hover{
+    transform: scale(1.1);
+}
+
+/* preveiw Image */
+
+.preveiw-image{
+    position: relative;
+    background-color: #ffffff;
+}
+
+.close-img{
+    position: absolute;
+    right: 1rem;
+    top: 0.5rem;
+    font-size: 2.5rem;
+    cursor: pointer;
+}
+
+.preveiw-image>img, .post-img{
+    width: 100%;
+    max-height: 20rem;
+    object-fit: cover;
+}

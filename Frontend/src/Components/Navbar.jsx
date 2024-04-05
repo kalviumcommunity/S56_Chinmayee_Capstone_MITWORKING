@@ -24,10 +24,10 @@ export default function Navbar() {
             <h2 className='nav-text'>Profile</h2>
         </Link>
 
-        <div className='nav-content create-post'>
+        <Link to={"/upload"} className='nav-content create-post'>
             <img className='createPost-icon icon' src={edit} alt="post-icon" />
             <h2 className='nav-text'>Create post</h2>
-        </div>
+        </Link>
 
         <div className='nav-content messages'>
             <img className='messages-icon icon' src={chat} alt="messages-icon" />

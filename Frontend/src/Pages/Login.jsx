@@ -1,7 +1,7 @@
 import React from 'react'
 import './Login.css'
 import { Link } from "react-router-dom";
-import Carousel from './Carousel';
+import Carousel from '../Components/Carousel';
 
 export default function Login() {
 
