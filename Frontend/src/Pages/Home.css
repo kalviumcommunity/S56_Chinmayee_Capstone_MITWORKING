@@ -18,6 +18,13 @@
     }
 }
 
+:root {
+    --color1: rgba(59, 58, 54, 1);
+    --color2: rgba(46, 46, 46, 1);
+    --border: rgba(228, 222, 222, 1);
+    --white: rgb(255 255 255);
+}
+
 .home-box{
     max-width: 100vw;
     height: fit-content;
@@ -31,8 +38,8 @@
     font-size: 15px;
     text-align: center;
     border-radius: 4px;
-    border: 2px solid rgba(228, 222, 222, 1);
-    color: rgba(59, 58, 54, 1);
+    border: 2px solid var(--border);
+    color: var(--color1);
     outline: none;
 }
 
@@ -46,7 +53,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    border: 2px solid rgba(228, 222, 222, 1);
+    border: 2px solid var(--border);
 }
 
 .post{
@@ -55,7 +62,7 @@
     display: flex;
     align-items: center;
     flex-direction: column;
-    border: 2px solid rgba(228, 222, 222, 1);
+    border: 2px solid var(--border);
 }
 
 .post-img{
@@ -66,7 +73,7 @@
 
 .post-icons{
     width: 18vh;
-    height: 10vhx;
+    height: 5vh;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -80,13 +87,13 @@
 }
 
 .likes{
-    color: rgba(59, 58, 54, 1);
+    color: var(--color1);
     margin: 1vh 27vw 0 0;
     
 }
 
 .caption{
-    color: rgba(59, 58, 54, 1);
+    color: var(--color1);
     display: flex;
     margin: 0.5vh 0 0 3.5vw;
     width: 35vw;
@@ -111,7 +118,7 @@
     position: fixed;
     top: 2vh;
     right: 5vw;    
-    border: 2px solid rgba(59, 58, 54, 1);
+    border: 2px solid var(--color1);
     border-radius: 6px;
     box-shadow: 2px 2px 2px rgb(179, 176, 176);
 }
@@ -145,7 +152,7 @@
 }
 
 .top-line{
-    border: 1px solid rgba(59, 58, 54, 1);
+    border: 1px solid var(--color1);
     width: 19vw;
     height: 0;
 }
@@ -159,7 +166,7 @@
 }
 
 .middle-line{
-    border: 1px solid rgba(59, 58, 54, 1);
+    border: 1px solid var(--color1);
     width: 0;
     height: 9vh;
 }
@@ -173,20 +180,19 @@
 }
 
 .bottom-line{
-    border: 1px solid rgba(59, 58, 54, 1);
+    border: 1px solid var(--color1);
     width: 19vw;
     height: 0;
 }
 
 .prf-btn{
-    border: 1px solid red;
     width: 21vw;
     height: 8vh;
     border-radius: 0 0 6px 6px;
     font-size: 14px;
     font-weight: bold;
-    color: rgba(59, 58, 54, 1);
+    color: var(--color1);
     margin-top: 1.7vh;
-    background-color: rgb(255 255 255);
+    background-color: var(--white);
     border: 0;
 }
