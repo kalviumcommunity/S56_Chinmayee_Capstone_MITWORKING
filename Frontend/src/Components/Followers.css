@@ -8,7 +8,7 @@
 
 .heading{
     font-size: 25px;
-    color: rgba(59, 58, 54, 1);
+    color: var(--color1);
 }
 
 .container{
@@ -21,14 +21,14 @@
 }
 
 .follower{
-    border: 2px solid rgba(59, 58, 54, 1);
+    border: 2px solid var(--color1);
     height: 10vh;
     display: flex;
     justify-content: space-around;
     align-items: center;
     border-radius: 5px;    
-    color: rgba(59, 58, 54, 1);
-    background-color: rgb(255, 255, 255);
+    color: var(--color1);
+    background-color: var(--white);
 }
 
 .follower-prf{
@@ -42,13 +42,13 @@
 }
 
 .follow{
-    color: rgb(255, 255, 255);
+    color: var(--white);
     width: 5vw;
     height: 4.5vh;
     font-weight: bold;
     border-radius: 4px;
     border: 0px;
-    background-color: rgba(59, 58, 54, 1);
+    background-color: var(--color1);
     transition: 0.5s ease;
 }
 

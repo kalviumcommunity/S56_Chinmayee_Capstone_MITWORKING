@@ -1,6 +1,6 @@
 .login-page{
     display: flex;
-    background-color: rgba(46, 46, 46, 1);
+    background-color: var(--color2);
 }
 
 .login-div{
@@ -25,7 +25,7 @@
 }
 
 .login-title{
-    color: rgba(59, 58, 54, 1);
+    color: var(--color1);
     font-size: 1.8rem;
 }
 
@@ -37,11 +37,11 @@
 .input-box input{
     width: 21vw;
     padding: 0.6rem;
-    border: 1px solid rgba(59, 58, 54, 1);
+    border: 1px solid var(--color1);
     background-color: rgba(237, 234, 229, 1);
     border-radius: 0.3rem;
     outline: none;
-    color: rgba(59, 58, 54, 1);
+    color: var(--color1);
     transition: 0.5s ease;
 }
 
@@ -51,24 +51,24 @@
     padding: 0.68rem;
     pointer-events: none;
     font-size: 0.75rem;
-    color: rgba(59, 58, 54, 1);
+    color: var(--color1);
     text-transform: uppercase;
     transition: 0.5s ease;
 }
 
 .input-box input:valid ~ span,
 .input-box input:focus ~ span{
-    color: rgba(59, 58, 54, 1);
+    color: var(--color1);
     transform: translateX(10px) translateY(-7px);
     font-size: 0.7rem;
     padding: 0 0.6rem;
     background: rgba(237, 234, 229, 1);
-    border-left: 1px solid rgba(59, 58, 54, 1);
-    border-right: 1px solid rgba(59, 58, 54, 1);
+    border-left: 1px solid var(--color1);
+    border-right: 1px solid var(--color1);
 }
 
 .input-box input:focus{
-    border: 2px solid rgba(59, 58, 54, 1);
+    border: 2px solid var(--color1);
 }
 
 .login-btn{
@@ -76,7 +76,7 @@
     height: 6vh;
     letter-spacing: 3px;
     color: rgba(237, 234, 229, 1);
-    background-color: rgba(46, 46, 46, 1);
+    background-color: var(--color2);
     font-style: normal;
     border: 0;
     font-size: 0.9rem;

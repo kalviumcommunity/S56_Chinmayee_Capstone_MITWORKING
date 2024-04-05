@@ -11,7 +11,7 @@
     flex-direction: column;
     align-items: center;
     justify-content: space-evenly;
-    border: 2px solid rgba(228, 222, 222, 1);
+    border: 2px solid var(--border);
 }
 
 /* Upload form */
@@ -20,7 +20,7 @@
     width: 41.5vw;
     height: 25vh;
     margin: 5vh 20vw;
-    border: 2px solid rgba(59, 58, 54, 1);
+    border: 2px solid var(--color1);
     border-radius: 6px;
     box-shadow: 2px 2px 2px rgb(179, 176, 176);
     display: flex;
@@ -48,10 +48,10 @@
     width: 25vw;
     height: 5.5vh;
     border-radius: 3px;
-    border: 1.5px solid rgba(59, 58, 54, 1);
+    border: 1.5px solid var(--color1);
     outline: none;
     text-align: center;
-    color: rgba(59, 58, 54, 1);
+    color: var(--color1);
 }
 
 .upload-icons{
@@ -91,7 +91,7 @@
     height: 4.5vh;
     font-weight: bold;
     border: 0px;
-    background-color: rgba(59, 58, 54, 1);
+    background-color: var(--color1);
     transition: 0.5s ease;
     margin: 1vh 0;
     border-radius: 3px;

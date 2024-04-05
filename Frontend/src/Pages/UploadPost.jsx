@@ -32,25 +32,25 @@ export default function UploadPost() {
             <div className='upload-div'>
                 <div className='upload-overveiw'>
                     <div className='upload-input'>
-                        <img className='upload-prf' src={profile} alt={profile} />
+                        <img className='upload-prf' src={profile} alt="user's profile image" />
                         <input type="text" placeholder='Enter Caption'/>
                     </div>
 
                     <div className='upload-icons'>
                         <div onClick={()=>imageRef.current.click()}>
-                            <img className='upload-icon' src={photo} alt={photo} />
+                            <img className='upload-icon' src={photo} alt="upload image icon" />
                             <h2>Image</h2>
                         </div>
                         <div>
-                            <img className='upload-icon' src={upload} alt={upload} />
+                            <img className='upload-icon' src={upload} alt="upload Video icon" />
                             <h2>Video</h2>
                         </div>
                         <div>
-                            <img className='upload-icon' src={location} alt={location} />
+                            <img className='upload-icon' src={location} alt="upload Location icon"/>
                             <h2>Location</h2>
                         </div>
                         <div>
-                            <img className='upload-icon' src={calender} alt={calender} />
+                            <img className='upload-icon' src={calender} alt="upload Schedule icon" />
                             <h2>Schedule</h2>
                         </div>
 
@@ -64,7 +64,7 @@ export default function UploadPost() {
                     {image && (
                         <div className='preveiw-image'>
                             <span className="close-img" onClick={()=>setImage(null)}>&times;</span>
-                            <img src={image.image} alt="" />
+                            <img src={image.image} alt="uploaded image preveiw" />
                         </div>
                     )}
 
