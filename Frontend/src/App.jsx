@@ -6,6 +6,8 @@ import Login from './Pages/Login'
 import Signup from './Pages/Signup'
 import Profile from './Pages/Profile'
 import UploadPost from './Pages/UploadPost'
+import Messages from './Pages/Messages'
+import Theme from './Pages/Theme'
 
 
 function App() {
@@ -18,6 +20,8 @@ function App() {
         <Route path='/home' element={<Home/>}/>
         <Route path='/profile' element={<Profile/>}/>
         <Route path='/upload' element={<UploadPost/>}/>
+        <Route path='/messages' element={<Messages/>}/>
+        <Route path='/theme' element={<Theme/>}/>
       </Routes>
       </BrowserRouter>
   )

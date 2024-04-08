@@ -57,7 +57,7 @@ export default function UploadPost() {
                         <button>Upload</button>
 
                     </div>
-                    <div className='post-img' style={{display:"none"}}>
+                    <div className='upload-img' style={{display:"none"}}>
                         <input type="file" name='myImage' ref={imageRef} onChange={onImageChange}/>
                     </div>
 
