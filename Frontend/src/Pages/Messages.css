@@ -1,0 +1,191 @@
+.msg-page{
+    max-width: 100vw;
+    height: fit-content;
+    color: var(--color1);
+}
+
+.msg-page nav{
+    max-width: 100vw;
+    height: 9vh;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border: 2px solid var(--color2);
+}
+
+.msg-logo{
+    width: 16vw;
+    height: 9vh;
+    margin-left: 1vw;
+}
+
+.msg-icons{
+    width: 30vw;
+    height: 9vh;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+.msg-icons img{
+    width: 25px;
+    height: 25px;
+}
+
+.msg-container{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 90.5vh;
+}
+
+/* left side */
+.contacts{
+    border: 2px solid var(--color1);
+    height: 83vh;
+    width: 20vw;
+    border-radius: 0 10px 10px 0;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 2px 2px 2px rgb(217, 213, 213);
+}
+
+.contacts h2{
+    margin: 2vh 1vw;
+}
+
+.prev-contact{
+    border: 2px solid var(--color2);
+    width: 18vw;
+    height: 9vh;
+    margin-left: 0.8vw;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    margin-top: 2vh;
+    transition: 0.5s ease;
+}
+
+.prev-contact:hover{
+    background-color: rgb(232, 231, 231);
+}
+
+.prev-contact img{
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    margin-left: 1vw;
+}
+
+.prev-contact div{
+    margin-left: 2vw;
+}
+
+.prev-contact div h3{
+    font-size: 15px;
+    font-weight: bold;
+}
+
+.prev-contact div h4{
+    font-size: 13px;
+    font-weight: light;
+}
+
+/* right side */
+.chat-section{
+    width: 75vw;
+    height: 83vh;
+    border-radius: 7px;
+    border: 2px solid var(--color2);
+}
+
+.chat-info{
+    display: flex;
+    align-items: center;
+    height: 9vh;
+    background-color: var(--color2);
+}
+
+.chat-info img{
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    margin-left: 2vw;
+}
+
+.curr-contact{
+    color: white;
+    margin-left: 1vw;
+    letter-spacing: 1.5px;
+}
+
+.curr-contact h3{
+    font-size: 15px;
+}
+
+.curr-contact h4{
+    font-size: 12px;
+    font-weight: light;
+    
+}
+
+.msg-div{
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.msg1{
+    height: fit-content;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    margin-top: 0.5vh;
+}
+
+.msg2{
+    height: fit-content;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+}
+
+.sent-msg {
+    border: 1.5px solid var(--color1);
+    border-radius: 9px 9px 9px 0;
+    max-width: 70%; 
+    padding: 10px;
+    margin-bottom: 10px;
+}
+
+.received-msg {
+    border: 1.5px solid var(--color1);
+    max-width: 70%;
+    border-radius: 9px 9px 0 9px;
+    padding: 10px;
+    margin-bottom: 10px;
+}
+
+.msg-time {
+    font-size: 12px;
+    color: #888; 
+}
+
+.msg-div input{
+    position: fixed;
+    bottom: 6vh;
+    right: 3vw;
+    width: 70vw;
+    height: 6vh;
+    border-radius: 18px;
+    outline: none;
+    border: 0;
+    background-color: var(--color2);
+    color: var(--white);
+    padding-left: 1vw;
+}
+
+.msg-div input::placeholder{
+    padding-left: 1vw;
+}

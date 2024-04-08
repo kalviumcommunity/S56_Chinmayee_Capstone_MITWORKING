@@ -116,7 +116,7 @@
     cursor: pointer;
 }
 
-.preveiw-image>img, .post-img{
+.preveiw-image>img, .postPage-img{
     width: 100%;
     max-height: 20rem;
     object-fit: cover;

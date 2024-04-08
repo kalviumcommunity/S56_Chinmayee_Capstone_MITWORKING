@@ -29,10 +29,10 @@ export default function Navbar() {
             <h2 className='nav-text'>Create post</h2>
         </Link>
 
-        <div className='nav-content messages'>
+        <Link to={"/messages"} className='nav-content messages'>
             <img className='messages-icon icon' src={chat} alt="messages-icon" />
             <h2 className='nav-text'>Messages</h2>
-        </div>
+        </Link>
 
         <div className='nav-content theme'>
             <img className='theme-icon icon' src={theme} alt="theme-icon" />

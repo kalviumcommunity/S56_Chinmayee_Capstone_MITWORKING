@@ -6,6 +6,7 @@ import Login from './Pages/Login'
 import Signup from './Pages/Signup'
 import Profile from './Pages/Profile'
 import UploadPost from './Pages/UploadPost'
+import Messages from './Pages/Messages'
 
 
 function App() {
@@ -18,6 +19,7 @@ function App() {
         <Route path='/home' element={<Home/>}/>
         <Route path='/profile' element={<Profile/>}/>
         <Route path='/upload' element={<UploadPost/>}/>
+        <Route path='/messages' element={<Messages/>}/>
       </Routes>
       </BrowserRouter>
   )
