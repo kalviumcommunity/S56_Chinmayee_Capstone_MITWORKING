@@ -23,7 +23,7 @@ export default function Messages() {
             <Link to={'/home'}><img src={home} alt="home icon" /></Link>
             <Link to={'/messages'}><img src={chat} alt="chat icon" /></Link>
             <Link to={'/upload'}><img src={edit} alt="edit icon" /></Link>
-            <Link><img src={theme} alt="theme icon" /></Link>
+            <Link to={'/theme'}><img src={theme} alt="theme icon" /></Link>
             <Link to={'/profile'}><img src={profile} alt="profile icon" /></Link>
         </div>
       </nav>
@@ -47,7 +47,7 @@ export default function Messages() {
                 </div>
             </div>
             <div className='prev-contact'>
-                <img src={profile1} alt="profile of previous person" />
+                <img src={profile3} alt="profile of previous person" />
                 <div>
                     <h3>Ayush</h3>
                     <h4>Offline</h4>

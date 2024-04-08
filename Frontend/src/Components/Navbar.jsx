@@ -34,10 +34,10 @@ export default function Navbar() {
             <h2 className='nav-text'>Messages</h2>
         </Link>
 
-        <div className='nav-content theme'>
+        <Link to={'/theme'} className='nav-content theme'>
             <img className='theme-icon icon' src={theme} alt="theme-icon" />
             <h2 className='nav-text'>Theme</h2>
-        </div>
+        </Link>
 
         <button className='logout-btn'>Logout</button>
       </nav>
