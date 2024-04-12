@@ -1,6 +1,7 @@
 const express = require('express');
 const registerUser = require('./controller/AuthController.js');
 const router = express.Router()
+const UserModel = require('./models/userModel.js')
 
 router.get('/' , (req, res) =>{
     try {
@@ -11,6 +12,6 @@ router.get('/' , (req, res) =>{
     }
 })
 
-router.post('/register', registerUser)
+router.post("/user", registerUser)
 
-module.exports = router  
+module.exports = router ; 
