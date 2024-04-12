@@ -39,7 +39,7 @@ export default function Navbar() {
             <h2 className='nav-text'>Theme</h2>
         </Link>
 
-        <button className='logout-btn'>Logout</button>
+        <Link to={'/'}><button className='logout-btn'>Logout</button></Link>
       </nav>
     </>
   )
