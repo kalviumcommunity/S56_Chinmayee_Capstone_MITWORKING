@@ -7,7 +7,6 @@ const mongoServer = require('./config/db.js')
 
 
 const app = express();
-const cors=require("cors");
 const corsOptions ={
    origin:'http://localhost:5173', 
    credentials:true,           
