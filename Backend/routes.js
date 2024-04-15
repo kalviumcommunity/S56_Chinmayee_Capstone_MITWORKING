@@ -1,6 +1,7 @@
 const express = require('express');
 const { loginUser, registerUser} = require('./controller/AuthController.js');
 const router = express.Router()
+const {getUser, updateUser, deleteUser} = require("./controller/UserController.js")
 
 router.get('/' , (req, res) =>{
     try {
@@ -13,6 +14,9 @@ router.get('/' , (req, res) =>{
 
 router.post("/register", registerUser)
 router.post("/login", loginUser)
+router.get('/:id', getUser)
+router.put('/:id', updateUser)
+router.delete('/:id', deleteUser)
 
 
 module.exports = router ; 

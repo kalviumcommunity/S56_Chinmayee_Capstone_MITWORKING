@@ -7,17 +7,14 @@ const mongoServer = require('./config/db.js')
 
 
 const app = express();
-app.use(
-    cors({
-      origin: function (origin, callback) {
-        if (!origin || allowedOrigins.includes(origin)) {
-          callback(null, true);
-        } else {
-          callback(new Error('Not allowed by CORS'));
-        }
-      },
-    })
-  );
+const corsOptions ={
+   origin:'http://localhost:5173',
+//    origin:'https://dreamy-platypus-548888.netlify.app/', 
+   credentials:true,           
+   optionSuccessStatus:200,
+}
+
+app.use(cors(corsOptions))
 app.use(express.json());
 app.use("/", routes);
 
