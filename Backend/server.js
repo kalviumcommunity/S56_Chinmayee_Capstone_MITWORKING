@@ -9,7 +9,7 @@ const mongoServer = require('./config/db.js')
 const app = express();
 const corsOptions ={
    origin:'http://localhost:5173',
-  //  origin:'https://dreamy-platypus-548888.netlify.app/', 
+//    origin:'https://dreamy-platypus-548888.netlify.app/', 
    credentials:true,           
    optionSuccessStatus:200,
 }
