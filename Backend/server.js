@@ -3,7 +3,7 @@ const express = require("express");
 const routes = require("./routes");
 const mongoose = require("mongoose");
 const cors = require('cors')
-const mongoServer = require('./config/db.js')
+const config = require('./config/db.js')
 
 
 const app = express();
@@ -36,7 +36,7 @@ process.on('unhandledRejection', error => {
 
 const connectToDB = async () => {
     try {
-        await mongoose.connect(mongoServer.mongoURI)
+        await mongoose.connect(config.mongoURI)
     console.log('connected to mongoDB');
     } catch (err) {
     console.error('error connecting to mongoDB:', err.message);
