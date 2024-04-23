@@ -22,7 +22,7 @@ export default function Login() {
   const handleSubmit = async (e) => {
     e.preventDefault()
     try {
-      const response = await axios.post('/login', formData) 
+      const response = await axios.post('https://s56-chinmayee-capstone-mitworking.onrender.com/login', formData) 
       if (response.status === 200) {
         console.log('Login successful')
         alert('Login successful')
