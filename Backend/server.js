@@ -3,7 +3,7 @@ const express = require("express");
 const routes = require("./routes");
 const mongoose = require("mongoose");
 const cors = require('cors')
-const mongoServer = require('./config/db.js')
+const config = require('./config/db.js')
 
 
 const app = express();
@@ -23,7 +23,7 @@ app.use((err, req, res, next) => {
   res.status(500).send("Internal Server Error");
 });
 
-const PORT = process.env.PORT || 3200;
+const PORT = config.Port || 3200;
 
     
 app.get("/" , (req,res)=>{
@@ -36,10 +36,10 @@ process.on('unhandledRejection', error => {
 
 const connectToDB = async () => {
     try {
-        await mongoose.connect(mongoServer.mongoURI)
-    console.log('connected to mongoDB');
+        await mongoose.connect(config.mongoURI)
+        console.log('connected to mongoDB');
     } catch (err) {
-    console.error('error connecting to mongoDB:', err.message);
+        console.error('error connecting to mongoDB:', err.message);
     }
 };
   
