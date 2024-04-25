@@ -20,21 +20,35 @@ export default function Login() {
   }
 
   const handleSubmit = async (e) => {
-    e.preventDefault()
+    e.preventDefault();
     try {
-      const response = await axios.post('https://s56-chinmayee-capstone-mitworking.onrender.com/login', formData) 
+      const response = await axios.post('https://s56-chinmayee-capstone-mitworking.onrender.com/login', formData);
       if (response.status === 200) {
-        console.log('Login successful')
-        alert('Login successful')
-        navigate('/home')
+        console.log('Login successful');
+        alert('Login successful');
+        navigate('/home');
       } else {
-        console.error('Login failed')
-        alert('Login failed')
+        console.error('Login failed');
+        alert('Login failed');
       }
     } catch (error) {
-      console.error('Error:', error)
+      console.error('Error:', error);
+      if (error.response) {
+        console.error('Server responded with error status:', error.response.status);
+        if (error.response.status === 401) {
+          alert('Incorrect username or password');
+        } else {
+          alert('An unexpected error occurred. Please try again later.');
+        }
+      } else if (error.request) {
+        console.error('No response received from the server:', error.request);
+        alert('No response received from the server. Please check your internet connection.');
+      } else {
+        console.error('Error setting up request:', error.message);
+        alert('An unexpected error occurred. Please try again later.');
+      }
     }
-  }
+  };
 
   return (
     <>
