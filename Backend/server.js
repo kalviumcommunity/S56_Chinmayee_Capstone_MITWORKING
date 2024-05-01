@@ -1,6 +1,7 @@
 require("dotenv").config();
 const express = require("express");
-const routes = require("./routes");
+const routes = require("./routes/routes.js");
+const postRoutes = require("./routes/postRoutes.js");
 const mongoose = require("mongoose");
 const cors = require('cors')
 const config = require('./config/db.js')
@@ -16,7 +17,10 @@ const corsOptions ={
 
 app.use(cors(corsOptions))
 app.use(express.json());
+
 app.use("/", routes);
+app.use("/post", postRoutes);
+
 
 app.use((err, req, res, next) => {
   console.error(err);
