@@ -71,7 +71,7 @@ export default function Home() {
               <div className='bottom-line'></div>
             </div>
 
-           <button className='prf-btn'>Profile</button>
+            <Link to={'/profile'}><button className='prf-btn'>Profile</button></Link> 
         </div>
 
       </div>
