@@ -7,6 +7,7 @@ const userSchema = new mongoose.Schema({
     isAdmin:{type: Boolean, default: false},
     profilePicture: {type: String},
     coverPicture: {type: String},
+    name: {type: Number},
     age: {type: Number},
     course: {type: String},
     year: {type: String},
