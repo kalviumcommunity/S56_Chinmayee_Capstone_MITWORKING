@@ -25,8 +25,8 @@ export default function UploadPost() {
 
     const uploadPost = async () => {
         const formData = new FormData()
+        formData.append('description', caption)
         formData.append('image', imageRef.current.files[0])
-        formData.append('caption', caption)
 
         try {
             const response = await fetch('https://s56-chinmayee-capstone-mitworking.onrender.com/post', {
@@ -76,7 +76,7 @@ export default function UploadPost() {
 
                     {image && (
                         <div className='preveiw-image'>
-                            <span className="close-img" onClick={()=>setImage(null)}>&times</span>
+                            <span className="close-img" onClick={()=>setImage(null)}>&times;</span>
                             <img src={image.image} alt="uploaded image preveiw" />
                         </div>
                     )}
