@@ -5,8 +5,7 @@ const postRoutes = require("./routes/postRoutes.js");
 const mongoose = require("mongoose");
 const cors = require('cors')
 const config = require('./config/db.js')
-const {postCreate} = require('./routes/uploadRoute.js')
-
+const uploadRoute = require('./routes/uploadRoute.js');
 
 const app = express();
 const corsOptions ={
@@ -21,7 +20,7 @@ app.use(express.json());
 
 app.use("/", routes);
 app.use("/post", postRoutes);
-app.use("/upload", postCreate)
+app.use("/upload", uploadRoute);
 
 app.use((err, req, res, next) => {
   console.error(err);
