@@ -1,94 +1,100 @@
-import {useState, useRef} from 'react'
-import { useDispatch } from 'react-redux'
-import Navbar from '../Components/Navbar'
-import Followers from '../Components/Followers'
-import AboutMe from '../Components/AboutMe'
-import MyPosts from '../Components/MyPosts'
-import './UploadPost.css'
-import profile from '../assets/profile3.jpg'
-import photo from '../assets/image.png'
-import upload from '../assets/upload.png'
-import { uploadImage } from '../../actions/uploadAction'
-
+import { useState, useRef } from 'react';
+import Navbar from '../Components/Navbar';
+import Followers from '../Components/Followers';
+import AboutMe from '../Components/AboutMe';
+import MyPosts from '../Components/MyPosts';
+import './UploadPost.css';
+import profile from '../assets/profile3.jpg';
+import photo from '../assets/image.png';
+import upload from '../assets/upload.png';
+import axios from 'axios';
 
 export default function UploadPost() {
-    const [image, setImage] = useState(null)
-    const imageRef = useRef()
-    const dispatch = useDispatch()
-    const description = useRef()
+    const [caption, setCaption] = useState('');
+    const [file, setFile] = useState(null);
+    const fileInputRef = useRef();
 
-    const onImageChange = (e) =>{
-        if(e.target.files && e.target.files[0]){
-            let img = e.target.files[0]
-            setImage(img)
+    const onFileChange = (e) => {
+        if (e.target.files && e.target.files[0]) {
+            setFile(e.target.files[0]);
         }
-    }
+    };
 
-    const uploadPost = (e) => {
-        e.preventDefault()
-
-        const newPost = {
-            userId: localStorage.getItem('userId'),
-            description: description.current.value
+    const onUploadClick = async () => {
+        if (!file || !caption) {
+            console.error('Please select a file and enter a caption.');
+            return;
         }
 
-        if(image){
-            const data = new FormData()
-            const filename = Date.now() + image.name;
-            data.append("name", filename)
-            data.append("file", image)
-            newPost.image = filename
-            console.log(newPost)
-            try {
-                dispatch(uploadImage(data))
-            } catch (error) {
-                console.log(error)
-            }
-        }
-    }
+        const formData = new FormData();
+        formData.append('file', file);
+        formData.append('caption', caption);
 
-  return (
-    <>
+        try {
+            const response = await axios.post('/https://s56-chinmayee-capstone-mitworking.onrender.com/upload', formData, {
+                headers: {
+                    'Content-Type': 'multipart/form-data',
+                },
+            });
+            console.log('File uploaded:', response.data.url);
+            // Reset caption and file after successful upload
+            setCaption('');
+            setFile(null);
+        } catch (error) {
+            console.error('Error uploading file:', error);
+        }
+    };
+
+    return (
         <div className='upload-page'>
-            <Navbar/>
-            <Followers/>
+            <Navbar />
+            <Followers />
             <div className='upload-div'>
                 <div className='upload-overveiw'>
                     <div className='upload-input'>
                         <img className='upload-prf' src={profile} alt="user's profile image" />
-                        <input ref={description} required type="text" placeholder='Enter Caption'/>
+                        <input
+                            required
+                            type="text"
+                            placeholder='Enter Caption'
+                            value={caption}
+                            onChange={(e) => setCaption(e.target.value)}
+                        />
                     </div>
 
                     <div className='upload-icons'>
-                        <div onClick={()=>imageRef.current.click()}>
-                            <img className='upload-icon' src={photo} alt="upload image icon" />
-                            <h2>Image</h2>
+                        <div>
+                            <label htmlFor="fileInput">
+                                <img className='upload-icon' src={photo} alt="upload image icon" />
+                                <h2>Image</h2>
+                            </label>
+                            <input
+                                id="fileInput"
+                                type="file"
+                                accept="image/*,video/*"
+                                style={{ display: 'none' }}
+                                ref={fileInputRef}
+                                onChange={onFileChange}
+                            />
                         </div>
                         <div>
                             <img className='upload-icon' src={upload} alt="upload Video icon" />
                             <h2>Video</h2>
                         </div>
 
-                        <button  onClick={uploadPost}>Upload</button>
-
-                    </div>
-                    <div className='upload-img' style={{display:"none"}}>
-                        <input type="file" name='myImage' ref={imageRef} onChange={onImageChange}/>
+                        <button onClick={onUploadClick}>Upload</button>
                     </div>
 
-                    {image && (
-                        <div className='preveiw-image'>
-                            <span className="close-img" onClick={()=>setImage(null)}>&times;</span>
-                            <img src={URL.createObjectURL(image)} alt="uploaded image preveiw" />
+                    {file && (
+                        <div>
+                            <p>Selected File: {file.name}</p>
                         </div>
                     )}
-
                 </div>
-                <MyPosts/>
+                <MyPosts />
             </div>
 
-            <AboutMe/>
+            <AboutMe />
         </div>
-    </>
-  )
+    );
 }
