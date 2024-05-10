@@ -1,4 +1,5 @@
 import {useState, useRef} from 'react'
+import { useDispatch } from 'react-redux'
 import Navbar from '../Components/Navbar'
 import Followers from '../Components/Followers'
 import AboutMe from '../Components/AboutMe'
@@ -7,41 +8,42 @@ import './UploadPost.css'
 import profile from '../assets/profile3.jpg'
 import photo from '../assets/image.png'
 import upload from '../assets/upload.png'
+import { uploadImage } from '../../actions/uploadAction'
 
 
 export default function UploadPost() {
     const [image, setImage] = useState(null)
-    const [caption, setCaption] = useState('')
     const imageRef = useRef()
+    const dispatch = useDispatch()
+    const description = useRef()
 
     const onImageChange = (e) =>{
         if(e.target.files && e.target.files[0]){
             let img = e.target.files[0]
-            setImage({
-                image: URL.createObjectURL(img),
-            })
+            setImage(img)
         }
     }
 
-    const uploadPost = async () => {
-        const formData = new FormData()
-        formData.append('description', caption)
-        formData.append('image', imageRef.current.files[0])
+    const uploadPost = (e) => {
+        e.preventDefault()
 
-        try {
-            const response = await fetch('https://s56-chinmayee-capstone-mitworking.onrender.com/post', {
-                method: 'POST',
-                body: formData,
-            })
-            if (response.ok) {
-                console.log('Post uploaded successfully')
-                alert("Post uploaded successfully")
-            } else {
-                console.error('Failed to upload post')
-                alert("Failed to upload post")
+        const newPost = {
+            userId: localStorage.getItem('userId'),
+            description: description.current.value
+        }
+
+        if(image){
+            const data = new FormData()
+            const filename = Date.now() + image.name;
+            data.append("name", filename)
+            data.append("file", image)
+            newPost.image = filename
+            console.log(newPost)
+            try {
+                dispatch(uploadImage(data))
+            } catch (error) {
+                console.log(error)
             }
-        } catch (error) {
-            console.error('Error uploading post:', error)
         }
     }
 
@@ -54,7 +56,7 @@ export default function UploadPost() {
                 <div className='upload-overveiw'>
                     <div className='upload-input'>
                         <img className='upload-prf' src={profile} alt="user's profile image" />
-                        <input type="text" placeholder='Enter Caption'  value={caption} onChange={(e) => setCaption(e.target.value)}/>
+                        <input ref={description} required type="text" placeholder='Enter Caption'/>
                     </div>
 
                     <div className='upload-icons'>
@@ -77,7 +79,7 @@ export default function UploadPost() {
                     {image && (
                         <div className='preveiw-image'>
                             <span className="close-img" onClick={()=>setImage(null)}>&times;</span>
-                            <img src={image.image} alt="uploaded image preveiw" />
+                            <img src={URL.createObjectURL(image)} alt="uploaded image preveiw" />
                         </div>
                     )}
 

@@ -1,6 +1,6 @@
 const express = require('express');
-const { loginUser, registerUser} = require('../controller/AuthController.js');
 const router = express.Router()
+const { loginUser, registerUser} = require('../controller/AuthController.js');
 const {getUser, updateUser, deleteUser, followUser, unfollowUser} = require("../controller/UserController.js")
 
 // authentication

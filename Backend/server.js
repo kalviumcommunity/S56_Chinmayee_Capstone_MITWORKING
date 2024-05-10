@@ -5,12 +5,13 @@ const postRoutes = require("./routes/postRoutes.js");
 const mongoose = require("mongoose");
 const cors = require('cors')
 const config = require('./config/db.js')
+const UploadRoute = require('./routes/uploadRoute.js')
 
 
 const app = express();
 const corsOptions ={
    origin:'http://localhost:5173',
-//    origin:'https://dreamy-platypus-548888.netlify.app/', 
+//    origin:'https://mitworking.netlify.app/', 
    credentials:true,           
    optionSuccessStatus:200,
 }
@@ -20,7 +21,7 @@ app.use(express.json());
 
 app.use("/", routes);
 app.use("/post", postRoutes);
-
+app.use("/upload", UploadRoute)
 
 app.use((err, req, res, next) => {
   console.error(err);

@@ -26,6 +26,8 @@ export default function Signup() {
       if (response.status === 200) {
         console.log('Registration successful');
         alert('Registration successful')
+        const userId = response.data.userId;
+        localStorage.setItem('userId', userId);
         navigate('/home');
       } else {
         console.error('Registration failed');
