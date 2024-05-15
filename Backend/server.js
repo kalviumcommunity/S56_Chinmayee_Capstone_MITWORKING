@@ -9,8 +9,8 @@ const uploadRoute = require('./routes/uploadRoute.js');
 
 const app = express();
 const corsOptions ={
-   origin:'http://localhost:5173',
-//    origin:'https://mitworking.netlify.app/', 
+//    origin:'http://localhost:5173',
+   origin:'https://mitworking.netlify.app/', 
    credentials:true,           
    optionSuccessStatus:200,
 }
@@ -20,7 +20,7 @@ app.use(express.json());
 
 app.use("/", routes);
 app.use("/post", postRoutes);
-app.use("/upload", uploadRoute);
+app.use(uploadRoute);
 
 app.use((err, req, res, next) => {
   console.error(err);

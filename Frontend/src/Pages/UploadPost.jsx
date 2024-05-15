@@ -12,12 +12,19 @@ import axios from 'axios';
 export default function UploadPost() {
     const [caption, setCaption] = useState('');
     const [file, setFile] = useState(null);
+    const [image, setImage] = useState(null)
     const fileInputRef = useRef();
 
+
     const onFileChange = (e) => {
-        if (e.target.files && e.target.files[0]) {
-            setFile(e.target.files[0]);
+        if(e.target.files && e.target.files[0]){
+            let img = e.target.files[0]
+            setFile(img)
+            setImage({
+                image: URL.createObjectURL(img),
+            })
         }
+
     };
 
     const onUploadClick = async () => {
@@ -31,7 +38,7 @@ export default function UploadPost() {
         formData.append('caption', caption);
 
         try {
-            const response = await axios.post('https://s56-chinmayee-capstone-mitworking.onrender.com/upload', formData, {
+            const response = await axios.post(`https://s56-chinmayee-capstone-mitworking.onrender.com/upload/${localStorage.getItem("userId")}`, formData, {
                 headers: {
                     'Content-Type': 'multipart/form-data',
                 },
@@ -84,8 +91,10 @@ export default function UploadPost() {
                         <button onClick={onUploadClick}>Upload</button>
                     </div>
 
-                    {file && (
-                        <div>
+                    {image && (
+                        <div className='preveiw-image'>
+                            <span className="close-img" onClick={()=>setImage(null)}>&times;</span>
+                            <img src={image.image} alt="uploaded image preveiw" style={{display:image ? "block" : "none"}}/>
                             <p>Selected File: {file.name}</p>
                         </div>
                     )}

@@ -2,25 +2,31 @@ const express = require('express');
 const router = express.Router();
 const multer = require('multer');
 const path = require('path');
+const cloudinary = require("../cloudinary.js")
+const postModel = require("../models/postModel.js")
 
 const storage = multer.diskStorage({
-    destination: function (req, file, cb) {
-        cb(null, 'uploads/');
-    },
     filename: function (req, file, cb) {
-        cb(null, `${file.fieldname}-${Date.now()}${path.extname(file.originalname)}`); 
+        cb(null, file.originalname) 
     },
 });
 
 const upload = multer({ storage: storage });
 
-router.post('/upload', upload.single('file'), (req, res) => {
+// router.post('/upload', upload.single('file'), (req, res) => {
+    
+// });
+
+router.post('/upload/:id', upload.single('file'), async (req, res) => {
+    let id = req.params.id;
+    console.log(req.file, id);
     try {
-        const fileUrl = `https://s56-chinmayee-capstone-mitworking.onrender.com/uploads/${req.file.filename}`;
-        res.json({ url: fileUrl }); 
+        const result = await cloudinary.uploader.upload(req.file.path);
+        await postModel.create({ userId: id, description: req.body.caption, likes: [], image: result.url });
+        res.status(200).send({ url: result.url });
     } catch (error) {
-        console.error('Error uploading file:', error);
-        res.status(500).json({ error: 'Failed to upload file' });
+        console.error(error);
+        res.status(500).send({ error: error.message });
     }
 });
 
