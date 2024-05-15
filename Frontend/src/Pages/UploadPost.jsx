@@ -31,13 +31,12 @@ export default function UploadPost() {
         formData.append('caption', caption);
 
         try {
-            const response = await axios.post('/https://s56-chinmayee-capstone-mitworking.onrender.com/upload', formData, {
+            const response = await axios.post('https://s56-chinmayee-capstone-mitworking.onrender.com/upload', formData, {
                 headers: {
                     'Content-Type': 'multipart/form-data',
                 },
             });
             console.log('File uploaded:', response.data.url);
-            // Reset caption and file after successful upload
             setCaption('');
             setFile(null);
         } catch (error) {
