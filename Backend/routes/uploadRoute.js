@@ -13,14 +13,14 @@ const storage = multer.diskStorage({
 
 const upload = multer({ storage: storage });
 
-// router.post('/upload', upload.single('file'), (req, res) => {
-    
-// });
-
 router.post('/upload/:id', upload.single('file'), async (req, res) => {
     let id = req.params.id;
     console.log(req.file, id);
     try {
+        if (!req.file) {
+            return res.status(400).send({ error: 'No file provided' });
+        }
+
         const result = await cloudinary.uploader.upload(req.file.path);
         await postModel.create({ userId: id, description: req.body.caption, likes: [], image: result.url });
         res.status(200).send({ url: result.url });

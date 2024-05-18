@@ -34,7 +34,6 @@ const updateUser = async (req,res) =>{
                 req.body.password = await bcrypt.hash(password, salt)
             }
 
-
             const user = await UserModel.findByIdAndUpdate(id, req.body, {new:true})
             res.status(200).json(user)
         } catch (error) {
@@ -79,6 +78,11 @@ const followUser = async (req,res)=>{
         try {
             const followUser = await UserModel.findById(id)
             const followingUser = await UserModel.findById(currentUserId)
+            
+            if (!followUser || !followingUser) {
+                res.status(404).json("User not found");
+                return;
+            }
 
             if(!followUser.followers.includes(currentUserId)){
                 await followUser.updateOne({$push: {followers: currentUserId}})
@@ -110,6 +114,11 @@ const unfollowUser = async (req,res)=>{
             const followUser = await UserModel.findById(id)
             const followingUser = await UserModel.findById(currentUserId)
 
+            if (!followUser || !followingUser) {
+                res.status(404).json("User not found");
+                return;
+            }
+            
             if(followUser.followers.includes(currentUserId)){
                 await followUser.updateOne({$pull: {followers: currentUserId}})
                 await followingUser.updateOne({$pull: {following: id}})
