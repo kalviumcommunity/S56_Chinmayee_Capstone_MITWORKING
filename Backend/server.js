@@ -1,22 +1,26 @@
 require("dotenv").config();
 const express = require("express");
-const routes = require("./routes");
+const routes = require("./routes/routes.js");
+const postRoutes = require("./routes/postRoutes.js");
 const mongoose = require("mongoose");
 const cors = require('cors')
 const config = require('./config/db.js')
-
+const uploadRoute = require('./routes/uploadRoute.js');
 
 const app = express();
 const corsOptions ={
-   origin:'http://localhost:5173',
-//    origin:'https://dreamy-platypus-548888.netlify.app/', 
+//    origin:'http://localhost:5173',
+   origin:'https://mitworking.netlify.app', 
    credentials:true,           
    optionSuccessStatus:200,
 }
 
-app.use(cors(corsOptions))
+app.use(cors())
 app.use(express.json());
+
 app.use("/", routes);
+app.use("/post", postRoutes);
+app.use(uploadRoute);
 
 app.use((err, req, res, next) => {
   console.error(err);
