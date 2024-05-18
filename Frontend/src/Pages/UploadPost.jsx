@@ -95,7 +95,6 @@ export default function UploadPost() {
                         <div className='preveiw-image'>
                             <span className="close-img" onClick={()=>setImage(null)}>&times;</span>
                             <img src={image.image} alt="uploaded image preveiw" style={{display:image ? "block" : "none"}}/>
-                            <p>Selected File: {file.name}</p>
                         </div>
                     )}
                 </div>
