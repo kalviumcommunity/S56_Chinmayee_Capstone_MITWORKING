@@ -12,6 +12,19 @@ import { Link } from 'react-router-dom'
 
 
 export default function Home() {
+  const [posts, setPosts] = useState([]);
+
+  useEffect(() => {
+    axios.get('https://s56-chinmayee-capstone-mitworking.onrender.com/posts')
+      .then(response => {
+        setPosts(response.data);
+      })
+      .catch(error => {
+        console.error('Error fetching posts:', error);
+      });
+  }, []);
+
+
   return (
     <>
       <div className='home-box'>
@@ -21,39 +34,23 @@ export default function Home() {
         <div className='posts-container'>
         <input className='search-box' placeholder='Search for people' type="text" />
 
-          <div className='post'>
-            <img className='post-img' src={post1} alt="post1" />
+        {posts.map(post => (
+            <div key={post._id} className='post'>
+              <img className='post-img' src={post.image} alt={post.description} />
 
-            <div className='post-icons'>
-              <img className='like-icon post-icon' src={heart} alt="heart" />
-              <img className='comment-icon post-icon' src={message} alt="message" />
-              <img className='share-icon post-icon' src={share} alt="share" />
+              <div className='post-icons'>
+                <img className='like-icon post-icon' src={heart} alt="heart" />
+                <img className='comment-icon post-icon' src={message} alt="message" />
+                <img className='share-icon post-icon' src={share} alt="share" />
+              </div>
+
+              <h5 className='likes'>{post.likes.length} Likes</h5>
+              <div className='caption'>
+                <h3 className='post-name'>{post.userId}: </h3>
+                <h3 className='post-caption'>{post.description}</h3>
+              </div>
             </div>
-
-            <h5 className='likes'>400 Likes</h5>
-            <div className='caption'>
-              <h3 className='post-name'>Betty Gilbert: </h3>
-              <h3 className='post-caption'> Bright like sunflower 🌻🌻</h3>
-            </div>
-  
-          </div>
-
-          <div className='post'>
-            <img className='post-img' src={post2} alt="post2" />
-
-            <div className='post-icons'>
-              <img className='like-icon post-icon' src={heart} alt="heart" />
-              <img className='comment-icon post-icon' src={message} alt="message" />
-              <img className='share-icon post-icon' src={share} alt="share" />
-            </div>
-
-            <h5 className='likes'>400 Likes</h5>
-            <div className='caption'>
-              <h3 className='post-name'>Betty Gilbert: </h3>
-              <h3 className='post-caption'>Bright like sunflower 🌻🌻</h3>
-            </div>
-  
-          </div>
+          ))}
 
         </div>
 
