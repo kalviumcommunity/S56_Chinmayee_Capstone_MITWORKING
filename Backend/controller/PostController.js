@@ -13,7 +13,7 @@ const postCreate = async(req, res)=>{
     }
 }
 
-// Get Post
+// Get Post a specific post
 
 const getPost = async(req,res) =>{
     const id = req.params.id
@@ -25,6 +25,19 @@ const getPost = async(req,res) =>{
         res.status(500).json(error)
     }
 }
+
+// Get all posts
+const getAllPosts = async (req, res) => {
+    try {
+        const posts = await PostModel.find();
+        res.json(posts);
+    } catch (err) {
+        console.error('Error fetching posts:', err); // Log the error for better debugging
+        res.status(500).json({ message: err.message });
+    }
+};
+
+
 
 // update post
 const updatePost = async (req,res) =>{
@@ -84,5 +97,5 @@ const likePost = async (req,res) =>{
     }
 }
 
-module.exports = {postCreate, getPost, updatePost, deletePost, likePost};
+module.exports = {postCreate, getPost,getAllPosts, updatePost, deletePost, likePost};
 

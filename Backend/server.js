@@ -18,14 +18,14 @@ const corsOptions ={
 app.use(cors())
 app.use(express.json());
 
-app.use("/", routes);
-app.use("/post", postRoutes);
+// app.use("/", routes);
+app.use("/posts", postRoutes);
 app.use(uploadRoute);
 
 app.use((err, req, res, next) => {
-  console.error(err);
-  res.status(500).send("Internal Server Error");
-});
+    console.error(err.stack);
+    res.status(500).send('Something broke!');
+  });
 
 const PORT = config.Port || 3200;
 
