@@ -15,15 +15,15 @@ import axios from 'axios'
 export default function Home() {
   const [posts, setPosts] = useState([]);
 
-  axios.get('https://s56-chinmayee-capstone-mitworking.onrender.com/posts/postss')
-    .then(response => {
-      setPosts(response.data);
-    })
-    .catch((err)=> {
-      console.log('Error fetching posts:', err);
-    });
-  // useEffect(() => {
-  // }, []);
+  useEffect(() => {
+    axios.get('https://s56-chinmayee-capstone-mitworking.onrender.com/posts/postss')
+      .then(response => {
+        setPosts(response.data);
+      })
+      .catch((err)=> {
+        console.log('Error fetching posts:', err);
+      });
+  }, []);
 
   return (
     <>

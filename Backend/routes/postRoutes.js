@@ -4,7 +4,7 @@ const { postCreate, getPost, getAllPosts, updatePost, deletePost, likePost } = r
 
 // Posts routes
 router.post('/', postCreate);
-router.get('/', getAllPosts); // Changed to '/'
+router.get('/postss', getAllPosts);
 router.get('/:id', getPost);
 router.put('/:id', updatePost);
 router.delete('/:id', deletePost);
