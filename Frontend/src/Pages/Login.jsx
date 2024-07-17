@@ -26,8 +26,9 @@ export default function Login() {
       if (response.status === 200) {
         console.log('Login successful');
         alert('Login successful');
-        const userId = response.data._id;
-        localStorage.setItem('userId', userId);
+        const { _id, username } = response.data;
+        localStorage.setItem('userId', _id);
+        localStorage.setItem('username', username); 
         navigate('/home');
       } else {
         console.error('Login failed');
@@ -54,23 +55,23 @@ export default function Login() {
 
   return (
     <>
-    <div className='login-page'>
-      <Carousel/>
+      <div className='login-page'>
+        <Carousel/>
         <div className='login-div'>
-            <div className='login-form'>
-                <h2 className='login-title'>Login</h2>
-                <div className='input-box'>
-                  <input className='username-input' type="text" name="username" value={formData.username} onChange={handleChange} required="required"/>
-                  <span>Username</span>
-                </div>
-                <div className='input-box'>
-                  <input className='password-input' type="password" name="password" value={formData.password} onChange={handleChange} required="required" />
-                  <span>Password</span>
-                </div>
-
-                <Link to={"/home"}><button className='login-btn' onClick={handleSubmit}>Login</button></Link>
-                <Link to={"/signup"}><h3 className='signup-text'>Don’t have an account? signup</h3></Link>
+          <div className='login-form'>
+            <h2 className='login-title'>Login</h2>
+            <div className='input-box'>
+              <input className='username-input' type="text" name="username" value={formData.username} onChange={handleChange} required="required"/>
+              <span>Username</span>
             </div>
+            <div className='input-box'>
+              <input className='password-input' type="password" name="password" value={formData.password} onChange={handleChange} required="required" />
+              <span>Password</span>
+            </div>
+
+            <Link to={"/home"}><button className='login-btn' onClick={handleSubmit}>Login</button></Link>
+            <Link to={"/signup"}><h3 className='signup-text'>Don’t have an account? signup</h3></Link>
+          </div>
         </div>
       </div>
     </>
