@@ -26,8 +26,9 @@ export default function Login() {
       if (response.status === 200) {
         console.log('Login successful');
         alert('Login successful');
-        const { _id, username } = response.data;
-        localStorage.setItem('userId', _id);
+        const userId = response.data._id;
+        const username = response.data.username;
+        localStorage.setItem('userId', userId);
         localStorage.setItem('username', username); 
         navigate('/home');
       } else {
