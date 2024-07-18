@@ -45,10 +45,13 @@ export default function UploadPost() {
                 },
             });
             console.log('File uploaded:', response.data.url);
+            alert('Post uploaded ✅');
             setCaption('');
             setFile(null);
         } catch (error) {
             console.error('Error uploading file:', error);
+            alert('Error uploading file ❌');
+
         }
     };
 
