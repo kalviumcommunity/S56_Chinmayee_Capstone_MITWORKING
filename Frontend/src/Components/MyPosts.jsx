@@ -12,7 +12,7 @@ export default function MyPosts() {
   const userId = localStorage.getItem('userId');
   useEffect(() => {
     if (userId) {
-      axios.get(`https://s56-chinmayee-capstone-mitworking.onrender.com/posts/postss`)
+      axios.get(`https://s56-chinmayee-capstone-mitworking.onrender.com/posts/user/${userId}`)
         .then(response => {
           setPosts(response.data);
         })

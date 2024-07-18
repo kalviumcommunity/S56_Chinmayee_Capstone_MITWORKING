@@ -12,12 +12,12 @@ router.put('/:id/like', likePost);
 
 router.get('/user/:userId', async (req, res) => {
     const { userId } = req.params;
-    const result = await fetchPostsByUserId(userId);
-
-    if (result.status === 'success') {
-        res.status(200).json(result.data);
-    } else {
-        res.status(500).json({ error: result.message });
+    try {
+        const userPosts = await PostModel.find({ userId });
+        res.status(200).json(userPosts);
+    } catch (error) {
+        console.error('Error fetching user posts:', error);
+        res.status(500).json({ error: 'Failed to fetch user posts' });
     }
 });
 

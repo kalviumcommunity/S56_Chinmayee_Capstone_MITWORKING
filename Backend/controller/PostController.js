@@ -96,5 +96,5 @@ const likePost = async (req,res) =>{
     }
 }
 
-module.exports = {postCreate, getPost,getAllPosts, fetchPostsByUserId, updatePost, deletePost, likePost};
+module.exports = {postCreate, getPost,getAllPosts, updatePost, deletePost, likePost};
 
