@@ -36,7 +36,8 @@ export default function UploadPost() {
         const formData = new FormData();
         formData.append('file', file);
         formData.append('caption', caption);
-
+        formData.append('username', localStorage.getItem("username"));
+        
         try {
             const response = await axios.post(`https://s56-chinmayee-capstone-mitworking.onrender.com/upload/${localStorage.getItem("userId")}`, formData, {
                 headers: {
@@ -44,10 +45,13 @@ export default function UploadPost() {
                 },
             });
             console.log('File uploaded:', response.data.url);
+            alert('Post uploaded ✅');
             setCaption('');
             setFile(null);
         } catch (error) {
             console.error('Error uploading file:', error);
+            alert('Error uploading file ❌');
+
         }
     };
 

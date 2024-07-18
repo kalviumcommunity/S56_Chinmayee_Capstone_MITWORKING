@@ -25,13 +25,14 @@ export default function Signup() {
       const response = await axios.post('https://s56-chinmayee-capstone-mitworking.onrender.com/register', formData);
       if (response.status === 200) {
         console.log('Registration successful');
-        alert('Registration successful')
-        const userId = response.data.userId;
+        alert('Registration successful');
+        const { userId, username } = response.data;
         localStorage.setItem('userId', userId);
-        navigate('/home');
+        localStorage.setItem('username', username); 
+        navigate('/');
       } else {
         console.error('Registration failed');
-        alert('Registration failed')
+        alert('Registration failed');
       }
     } catch (error) {
       console.error('Error:', error);

@@ -58,7 +58,7 @@
 
 .post{
     max-width: 47vw;
-    height: 70vh;
+    height: fit-content;
     display: flex;
     align-items: center;
     flex-direction: column;
@@ -67,7 +67,7 @@
 
 .post-img{
     width: 32vw;
-    height: 50vh;
+    height: fit-content;
     margin-top: 4vh;
 }
 
