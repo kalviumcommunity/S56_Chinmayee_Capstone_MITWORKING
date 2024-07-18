@@ -2,8 +2,6 @@ import {useState, useEffect} from 'react'
 import './Home.css'
 import Navbar from '../Components/Navbar'
 import Followers from '../Components/Followers'
-import post1 from '../assets/post1.jpg'
-import post2 from '../assets/post2.jpg'
 import heart from '../assets/heart.png'
 import message from '../assets/messenger.png'
 import share from '../assets/share.png'
@@ -19,6 +17,7 @@ export default function Home() {
     axios.get('https://s56-chinmayee-capstone-mitworking.onrender.com/posts/postss')
       .then(response => {
         setPosts(response.data);
+        console.log(response.data);
       })
       .catch((err)=> {
         console.log('Error fetching posts:', err);
@@ -46,7 +45,7 @@ export default function Home() {
               </div>
               <h5 className='likes'>{post.likes.length} Likes</h5>
               <div className='caption'>
-                <h3 className='post-name'>{post.userId}: </h3>
+                <h3 className='post-name'>{post.username}: </h3>
                 <h3 className='post-caption'>{post.description}</h3>
               </div>
             </div>
@@ -56,8 +55,8 @@ export default function Home() {
         {/* Profile card */}
         <div className='profile-card'>
           <img className='prf-img' src={profile} alt="" />
-          <h2 className='prf-name'>Betty Gilbert</h2>
-          <h2 className='prf-username'>@bettygilbert</h2>
+          <h2 className='prf-name'>Chinmayee Harane</h2>
+          <h2 className='prf-username'>{localStorage.getItem("username")}</h2>
           <div className='lines'>
             <div className='top-line'></div>
             <h3 className='numOfFollwers'>1000 <br />Followers</h3>

@@ -28,8 +28,8 @@ export default function Signup() {
         alert('Registration successful');
         const { userId, username } = response.data;
         localStorage.setItem('userId', userId);
-        localStorage.setItem('username', username); // Store the username
-        navigate('/home');
+        localStorage.setItem('username', username); 
+        navigate('/');
       } else {
         console.error('Registration failed');
         alert('Registration failed');
