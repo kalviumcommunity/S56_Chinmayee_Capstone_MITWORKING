@@ -16,8 +16,9 @@ export default function Home() {
   useEffect(() => {
     axios.get('https://s56-chinmayee-capstone-mitworking.onrender.com/posts/postss')
       .then(response => {
-        setPosts(response.data);
-        console.log(response.data);
+        const sortedPosts = response.data.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
+        setPosts(sortedPosts);
+        console.log(sortedPosts);
       })
       .catch((err)=> {
         console.log('Error fetching posts:', err);

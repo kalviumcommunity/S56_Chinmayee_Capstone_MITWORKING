@@ -19,7 +19,8 @@ export default function MyPosts() {
         .then(response => {
           const allPosts = response.data;
           const userPosts = allPosts.filter(post => post.userId === userId);
-          setPosts(userPosts);
+          const sortedPosts = userPosts.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
+          setPosts(sortedPosts);
         })
         .catch((err)=> {
           console.log('Error fetching posts:', err.response ? err.response.data : err.message);
