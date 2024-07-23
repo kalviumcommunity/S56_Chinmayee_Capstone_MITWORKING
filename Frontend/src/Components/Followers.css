@@ -16,9 +16,8 @@
     flex-direction: column;
     justify-content: space-between;
     width: 22vw;
-    height: 50vh; /* Adjust height as needed */
+    height: 50vh; 
     margin-top: 3vh;
-    border: 1px solid red;
     overflow-y: auto; /
 }
 

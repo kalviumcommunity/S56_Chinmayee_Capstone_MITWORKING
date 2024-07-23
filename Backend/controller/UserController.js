@@ -1,5 +1,7 @@
 const UserModel = require("../models/userModel.js")
 const bcrypt = require("bcrypt")
+const filterSensitiveData = require("../utils/filterSensitiveData");
+
 
 // getting a user
 const getUser = async (req,res)=>{
@@ -9,8 +11,8 @@ const getUser = async (req,res)=>{
         const user = await UserModel.findById(id)
 
         if(user){
-            const {password, ...otherDetails} = user._doc
-            res.status(200).json(otherDetails)
+            const safeUser = filterSensitiveData(user);
+            res.status(200).json(safeUser)
         }
         else{
             res.status(404).json("No such user exists!")
@@ -24,11 +26,8 @@ const getUser = async (req,res)=>{
 const getAllUsers = async (req, res) => {
     try {
         const users = await UserModel.find();
-        const usersWithoutPasswords = users.map(user => {
-            const { password, ...otherDetails } = user._doc;
-            return otherDetails;
-        });
-        res.status(200).json(usersWithoutPasswords);
+        const safeUsers = users.map(user => filterSensitiveData(user));  
+        res.status(200).json(safeUsers);
     } catch (error) {
         res.status(500).json(error);
     }

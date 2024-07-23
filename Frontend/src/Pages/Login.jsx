@@ -42,7 +42,7 @@ export default function Login() {
         if (error.response.status === 401) {
           alert('Incorrect username or password');
         } else {
-          alert('An unexpected error occurred. Please try again later.');
+          alert('Please Signup.');
         }
       } else if (error.request) {
         console.error('No response received from the server:', error.request);
