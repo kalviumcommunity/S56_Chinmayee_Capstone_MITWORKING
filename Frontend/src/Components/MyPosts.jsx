@@ -12,12 +12,14 @@ export default function MyPosts() {
   const userId = localStorage.getItem('userId');
   useEffect(() => {
     if (userId) {
-      axios.get(`https://s56-chinmayee-capstone-mitworking.onrender.com/posts/user/${userId}`)
+      axios.get(`https://s56-chinmayee-capstone-mitworking.onrender.com/posts/postss`)
         .then(response => {
-          setPosts(response.data);
+          const allPosts = response.data;
+          const userPosts = allPosts.filter(post => post.userId === userId);
+          setPosts(userPosts);
         })
         .catch((err)=> {
-          console.log('Error fetching posts:', err);
+          console.log('Error fetching posts:', err.response ? err.response.data : err.message);
         });
     }
   }, [userId]);
@@ -42,8 +44,14 @@ export default function MyPosts() {
               <h3 className='prfPage-post-name'>{post.username}: </h3>
               <h3 className='prfPage-post-caption'>{post.description}</h3>
             </div>
+            
+            <div className='prfPage-buttons'>
+                <button className='prfPage-edit-btn'>Edit</button>
+                <button className='prfPage-delete-btn'>Delete</button>
+            </div>
         </div>
         ))} 
+
       </div>
     </div>
   )

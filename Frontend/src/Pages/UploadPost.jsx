@@ -30,6 +30,7 @@ export default function UploadPost() {
     const onUploadClick = async () => {
         if (!file || !caption) {
             console.error('Please select a file and enter a caption.');
+            alert("Please select a file and enter a caption.😊")
             return;
         }
 
