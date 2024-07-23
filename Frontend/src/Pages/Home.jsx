@@ -3,6 +3,8 @@ import './Home.css'
 import Navbar from '../Components/Navbar'
 import Followers from '../Components/Followers'
 import heart from '../assets/heart.png'
+import favorite from '../assets/favorite.png'
+
 import message from '../assets/messenger.png'
 import share from '../assets/share.png'
 import profile from '../assets/profile3.jpg'
@@ -12,18 +14,36 @@ import axios from 'axios'
 
 export default function Home() {
   const [posts, setPosts] = useState([]);
+  const [likedPosts, setLikedPosts] = useState({});
+
+  const userId = localStorage.getItem('userId');
 
   useEffect(() => {
     axios.get('https://s56-chinmayee-capstone-mitworking.onrender.com/posts/postss')
       .then(response => {
         const sortedPosts = response.data.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
+        const initialLikedPosts = response.data.reduce((acc, post) => {
+          acc[post._id] = post.likes.includes(userId);
+          return acc;
+        }, {});
         setPosts(sortedPosts);
         console.log(sortedPosts);
       })
       .catch((err)=> {
         console.log('Error fetching posts:', err);
       });
-  }, []);
+  }, [userId]);
+
+  const handleLike = async (postId) => {
+    try {
+      const response = await axios.put(`https://s56-chinmayee-capstone-mitworking.onrender.com/posts/${postId}/like`, { userId });
+      setLikedPosts({ ...likedPosts, [postId]: !likedPosts[postId] });
+      const updatedPosts = posts.map(post => post._id === postId ? { ...post, likes: likedPosts[postId] ? post.likes.filter(id => id !== userId) : [...post.likes, userId] } : post);
+      setPosts(updatedPosts);
+    } catch (error) {
+      console.log('Error liking post:', error.response ? error.response.data : error.message);
+    }
+  };
 
   return (
     <>
@@ -40,7 +60,7 @@ export default function Home() {
             <div key={post._id} className='post'>
               <img className='post-img' src={post.image} alt={post.description} />
               <div className='post-icons'>
-                <img className='like-icon post-icon' src={heart} alt="heart" />
+              <img className='like-icon post-icon' src={likedPosts[post._id] ? favorite : heart}  alt="heart"  onClick={() => handleLike(post._id)}  />
                 <img className='comment-icon post-icon' src={message} alt="message" />
                 <img className='share-icon post-icon' src={share} alt="share" />
               </div>

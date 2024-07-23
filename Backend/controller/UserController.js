@@ -20,6 +20,21 @@ const getUser = async (req,res)=>{
     }
 }
 
+// getting all users
+const getAllUsers = async (req, res) => {
+    try {
+        const users = await UserModel.find();
+        const usersWithoutPasswords = users.map(user => {
+            const { password, ...otherDetails } = user._doc;
+            return otherDetails;
+        });
+        res.status(200).json(usersWithoutPasswords);
+    } catch (error) {
+        res.status(500).json(error);
+    }
+};
+
+
 // updating the details
 const updateUser = async (req,res) =>{
     const id = req.params.id
@@ -136,4 +151,4 @@ const unfollowUser = async (req,res)=>{
 
 
 
-module.exports = {getUser, updateUser, deleteUser, followUser, unfollowUser}
+module.exports = {getUser, getAllUsers, updateUser, deleteUser, followUser, unfollowUser}
