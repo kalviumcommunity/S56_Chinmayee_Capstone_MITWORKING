@@ -8,26 +8,74 @@ import axios from 'axios'
 
 export default function MyPosts() {
   const [posts, setPosts] = useState([]);
+  const [isEditing, setIsEditing] = useState(false);
+  const [editPostId, setEditPostId] = useState(null);
+  const [editDescription, setEditDescription] = useState('');
 
   const userId = localStorage.getItem('userId');
   useEffect(() => {
     if (userId) {
       axios.get(`https://s56-chinmayee-capstone-mitworking.onrender.com/posts/postss`)
         .then(response => {
-          setPosts(response.data);
+          const allPosts = response.data;
+          const userPosts = allPosts.filter(post => post.userId === userId);
+          const sortedPosts = userPosts.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
+          setPosts(sortedPosts);
         })
         .catch((err)=> {
-          console.log('Error fetching posts:', err);
+          console.log('Error fetching posts:', err.response ? err.response.data : err.message);
         });
     }
   }, [userId]);
 
 
+  const handleDelete = async (postId) => {
+    const confirmDelete = window.confirm('Are you sure you want to delete this post?');
+    if (confirmDelete) {
+      try {
+        await axios.delete(`https://s56-chinmayee-capstone-mitworking.onrender.com/posts/${postId}`, {
+          data: { userId }
+        });
+        setPosts(posts.filter((post) => post._id !== postId));
+        alert("Post Deleted ✅")
+      } catch (error) {
+        console.log('Error deleting post:', error.response ? error.response.data : error.message);
+      }
+    }
+  };
+
+  const handleEdit = async (postId) => {
+    setIsEditing(true);
+    setEditPostId(postId);
+    const postToEdit = posts.find((post) => post._id === postId);
+    setEditDescription(postToEdit.description);
+  };
+
+  const handleSaveEdit = async () => {
+    try {
+      await axios.put(`https://s56-chinmayee-capstone-mitworking.onrender.com/posts/${editPostId}`, {
+        userId,
+        description: editDescription
+      });
+      setPosts(
+        posts.map((post) =>
+          post._id === editPostId ? { ...post, description: editDescription } : post
+        )
+      );
+      setIsEditing(false);
+      setEditPostId(null);
+      setEditDescription('');
+      alert("Post Updated ✅")
+    } catch (error) {
+      console.log('Error updating post:', error.response ? error.response.data : error.message);
+    }
+  };
+
   return (
     <div>
       {/* posts container*/}
       <div className='prfPage-posts-container'>
-      {posts.map(post => (
+      {posts.map((post) => (
         <div key={post._id} className='prfPage-post'>
             <img className='prfPage-post-img' src={post.image} alt={post.description} />
 
@@ -40,10 +88,34 @@ export default function MyPosts() {
             <h5 className='prfPage-likes'>{post.likes.length} Likes</h5>
             <div className='prfPage-caption'>
               <h3 className='prfPage-post-name'>{post.username}: </h3>
+              {isEditing && post._id === editPostId ? (
+                <input
+                  type='text'
+                  value={editDescription}
+                  onChange={(e) => setEditDescription(e.target.value)}
+                />
+              ) : (
               <h3 className='prfPage-post-caption'>{post.description}</h3>
+              )}
+            </div>
+            
+            <div className='prfPage-buttons'>
+              {isEditing && post._id === editPostId ? (
+                <button className='prfPage-save-btn' onClick={handleSaveEdit}>
+                  Save
+                </button>
+              ) : (
+                <button className='prfPage-edit-btn' onClick={() => handleEdit(post._id)}>
+                  Edit
+                </button>
+              )}
+              <button className='prfPage-delete-btn' onClick={() => handleDelete(post._id)}>
+                Delete
+              </button>
             </div>
         </div>
         ))} 
+
       </div>
     </div>
   )
