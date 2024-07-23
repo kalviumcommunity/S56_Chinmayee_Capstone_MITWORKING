@@ -6,9 +6,17 @@ import edit from '../assets/edit.png'
 import theme from '../assets/theme.png'
 import profile from '../assets/profile-user.png'
 import logo from '../assets/logo.png'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from "react-router-dom"
 
 export default function Navbar() {
+  const navigate = useNavigate()
+
+  const handleLogout = () => {
+    localStorage.removeItem('userId');
+    localStorage.removeItem('username');
+    navigate('/');
+  };
+
   return (
     <>
       <nav className='navbar'>
@@ -39,8 +47,7 @@ export default function Navbar() {
             <h2 className='nav-text'>Theme</h2>
         </Link>
 
-        <Link to={'/'}><button className='logout-btn'>Logout</button></Link>
-      </nav>
+        <button className='logout-btn' onClick={handleLogout}>Logout</button>      </nav>
     </>
   )
 }
