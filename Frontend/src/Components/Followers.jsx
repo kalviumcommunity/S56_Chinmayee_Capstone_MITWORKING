@@ -4,8 +4,9 @@ import axios from 'axios'
 import defaultPrf from  '../assets/default.png'
 
 
-export default function Followers({ userId }) {
+export default function Followers() {
 
+  const userId = localStorage.getItem("userId")
   const [allUsers, setAllUsers] = useState([]);
   const [following, setFollowing] = useState([]);
 
@@ -22,7 +23,7 @@ export default function Followers({ userId }) {
     const fetchFollowing = async () => {
       try {
         const response = await axios.get(`https://s56-chinmayee-capstone-mitworking.onrender.com/${userId}`);
-        setFollowing(response.data.following);
+        setFollowing(response.data.following.map(id => id.toString())); 
       } catch (error) {
         console.log('Error fetching following list:', error.response ? error.response.data : error.message);
       }
@@ -32,6 +33,7 @@ export default function Followers({ userId }) {
     fetchFollowing();
   }, [userId]);
 
+  console.log(userId);
   const handleFollow = async (id) => {
     try {
       if (following.includes(id)) {
@@ -39,11 +41,13 @@ export default function Followers({ userId }) {
           currentUserId: userId,
         });
         setFollowing(following.filter(userId => userId !== id));
+        alert('User unfollowed successfully! ✅');
       } else {
         await axios.put(`https://s56-chinmayee-capstone-mitworking.onrender.com/${id}/follow`, {
           currentUserId: userId,
         });
         setFollowing([...following, id]);
+        alert('User followed successfully! ✅');
       }
     } catch (error) {
       console.log('Error updating follow status:', error.response ? error.response.data : error.message);
@@ -62,7 +66,7 @@ export default function Followers({ userId }) {
               <h5 className='follower-username'>@{user.username}</h5>
             </div>
             <button className='follow' onClick={() => handleFollow(user._id)}>
-              {following.includes(user._id) ? 'Unfollow' : 'Follow'}
+              {following.includes(user._id.toString()) ? 'Unfollow' : 'Follow'}
             </button>
           </div>
         ))}

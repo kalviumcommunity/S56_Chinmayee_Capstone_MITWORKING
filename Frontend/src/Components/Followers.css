@@ -16,14 +16,17 @@
     flex-direction: column;
     justify-content: space-between;
     width: 22vw;
-    height: 37vh;
+    height: 50vh; /* Adjust height as needed */
     margin-top: 3vh;
+    border: 1px solid red;
+    overflow-y: auto; /
 }
 
 .follower{
     border: 2px solid var(--color1);
     height: 10vh;
     display: flex;
+    margin-top: 2vh;
     justify-content: space-around;
     align-items: center;
     border-radius: 5px;    
