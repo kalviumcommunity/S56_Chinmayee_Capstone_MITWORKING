@@ -14,8 +14,8 @@ const userSchema = new mongoose.Schema({
     hobbies: {type: String},
     club: {type: String},
     bio:{type: String},
-    followers: [{ type: mongoose.Schema.Types.ObjectId, ref: 'User' }],
-    following: [{ type: mongoose.Schema.Types.ObjectId, ref: 'User' }]
+    followers: [],
+    following: []
 })
 
 

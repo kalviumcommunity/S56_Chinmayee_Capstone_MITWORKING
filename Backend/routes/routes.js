@@ -8,8 +8,8 @@ router.post("/register", registerUser)
 router.post("/login", loginUser)
 
 // user manipulation
-router.get('/:id', getUser)
 router.get('/getall', getAllUsers)
+router.get('/:id', getUser)
 router.put('/:id', updateUser)
 router.delete('/:id', deleteUser)
 
