@@ -1,6 +1,5 @@
 const UserModel = require("../models/userModel.js")
 const bcrypt = require("bcrypt")
-const filterSensitiveData = require("../utils/filterSensitiveData");
 
 
 // getting a user
