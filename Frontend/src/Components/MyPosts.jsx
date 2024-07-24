@@ -4,6 +4,8 @@ import message from '../assets/messenger.png'
 import share from '../assets/share.png'
 import './Myposts.css'
 import axios from 'axios'
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 
 export default function MyPosts() {
@@ -37,7 +39,7 @@ export default function MyPosts() {
           data: { userId }
         });
         setPosts(posts.filter((post) => post._id !== postId));
-        alert("Post Deleted ✅")
+        toast.success("Post Deleted ✅")
       } catch (error) {
         console.log('Error deleting post:', error.response ? error.response.data : error.message);
       }
@@ -65,7 +67,7 @@ export default function MyPosts() {
       setIsEditing(false);
       setEditPostId(null);
       setEditDescription('');
-      alert("Post Updated ✅")
+      toast.success("Post Updated ✅")
     } catch (error) {
       console.log('Error updating post:', error.response ? error.response.data : error.message);
     }
@@ -117,6 +119,7 @@ export default function MyPosts() {
         ))} 
 
       </div>
+      <ToastContainer/>
     </div>
   )
 }

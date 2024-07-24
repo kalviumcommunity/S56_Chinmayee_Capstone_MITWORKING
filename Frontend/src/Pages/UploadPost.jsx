@@ -8,6 +8,8 @@ import profile from '../assets/profile3.jpg';
 import photo from '../assets/image.png';
 import upload from '../assets/upload.png';
 import axios from 'axios';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 export default function UploadPost() {
     const [caption, setCaption] = useState('');
@@ -30,7 +32,7 @@ export default function UploadPost() {
     const onUploadClick = async () => {
         if (!file || !caption) {
             console.error('Please select a file and enter a caption.');
-            alert("Please select a file and enter a caption.😊")
+            toast.error("Please select a file and enter a caption.😊")
             return;
         }
 
@@ -46,12 +48,12 @@ export default function UploadPost() {
                 },
             });
             console.log('File uploaded:', response.data.url);
-            alert('Post uploaded ✅');
+            toast.success('Post uploaded ✅');
             setCaption('');
             setFile(null);
         } catch (error) {
             console.error('Error uploading file:', error);
-            alert('Error uploading file ❌');
+            toast.error('Error uploading file ❌');
 
         }
     };
@@ -107,6 +109,7 @@ export default function UploadPost() {
             </div>
 
             <AboutMe />
+            <ToastContainer/>
         </div>
     );
 }

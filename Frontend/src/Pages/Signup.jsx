@@ -3,6 +3,8 @@ import './Signup.css';
 import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import Carousel from '../Components/Carousel';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 export default function Signup() {
   const [formData, setFormData] = useState({
@@ -25,14 +27,14 @@ export default function Signup() {
       const response = await axios.post('https://s56-chinmayee-capstone-mitworking.onrender.com/register', formData);
       if (response.status === 200) {
         console.log('Registration successful');
-        alert('Registration successful ✅');
+        toast.success('Registration successful ✅');
         const { userId, username } = response.data;
         localStorage.setItem('userId', userId);
         localStorage.setItem('username', username); 
         navigate('/');
       } else {
         console.error('Registration failed');
-        alert('Registration failed ❌');
+        toast.error('Registration failed ❌');
       }
     } catch (error) {
       console.error('Error:', error);
@@ -89,6 +91,7 @@ export default function Signup() {
           </div>
         </div>
       </div>
+      <ToastContainer/>
     </>
   );
 }

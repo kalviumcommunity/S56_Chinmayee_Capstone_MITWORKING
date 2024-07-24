@@ -3,6 +3,9 @@ import './Login.css'
 import { Link, useNavigate } from "react-router-dom"
 import Carousel from '../Components/Carousel'
 import axios from 'axios'
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 
 export default function Login() {
   const [formData, setFormData] = useState({
@@ -25,7 +28,7 @@ export default function Login() {
       const response = await axios.post('https://s56-chinmayee-capstone-mitworking.onrender.com/login', formData);
       if (response.status === 200) {
         console.log('Login successful');
-        alert('Login successful ✅');
+        toast.success('Login successful ✅');
         const userId = response.data._id;
         const username = response.data.username;
         localStorage.setItem('userId', userId);
@@ -33,23 +36,23 @@ export default function Login() {
         navigate('/home');
       } else {
         console.error('Login failed');
-        alert('Login failed ❌');
+        toast.error('Login failed ❌');
       }
     } catch (error) {
       console.error('Error:', error);
       if (error.response) {
         console.error('Server responded with error status:', error.response.status);
         if (error.response.status === 401) {
-          alert('Incorrect username or password');
+          toast.error('Incorrect username or password');
         } else {
-          alert('Please Signup.');
+          toast.error('Please Signup.');
         }
       } else if (error.request) {
         console.error('No response received from the server:', error.request);
-        alert('No response received from the server. Please check your internet connection.');
+        toast.error('No response received from the server. Please check your internet connection.');
       } else {
         console.error('Error setting up request:', error.message);
-        alert('An unexpected error occurred. Please try again later.');
+        toast.error('An unexpected error occurred. Please try again later.');
       }
     }
   };
@@ -75,6 +78,7 @@ export default function Login() {
           </div>
         </div>
       </div>
+      <ToastContainer />
     </>
   )
 }

@@ -2,6 +2,8 @@ import {useState, useEffect} from 'react'
 import './Followers.css'
 import axios from 'axios'
 import defaultPrf from  '../assets/default.png'
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 
 export default function Followers() {
@@ -41,13 +43,13 @@ export default function Followers() {
           currentUserId: userId,
         });
         setFollowing(following.filter(userId => userId !== id));
-        alert('User unfollowed successfully! ✅');
+        toast.success('User unfollowed successfully! ✅');
       } else {
         await axios.put(`https://s56-chinmayee-capstone-mitworking.onrender.com/${id}/follow`, {
           currentUserId: userId,
         });
         setFollowing([...following, id]);
-        alert('User followed successfully! ✅');
+        toast.success('User followed successfully! ✅');
       }
     } catch (error) {
       console.log('Error updating follow status:', error.response ? error.response.data : error.message);
@@ -71,6 +73,7 @@ export default function Followers() {
           </div>
         ))}
       </div>
+      <ToastContainer/>
     </div>
   );
 }
