@@ -15,6 +15,7 @@ export default function UploadPost() {
     const [caption, setCaption] = useState('');
     const [file, setFile] = useState(null);
     const [image, setImage] = useState(null)
+    const [loading, setLoading] = useState(false);
     const fileInputRef = useRef();
 
 
@@ -36,6 +37,7 @@ export default function UploadPost() {
             return;
         }
 
+        setLoading(true);
         const formData = new FormData();
         formData.append('file', file);
         formData.append('caption', caption);
@@ -54,7 +56,8 @@ export default function UploadPost() {
         } catch (error) {
             console.error('Error uploading file:', error);
             toast.error('Error uploading file ❌');
-
+        } finally {
+            setLoading(false); // Reset loading state
         }
     };
 
@@ -95,7 +98,13 @@ export default function UploadPost() {
                             <h2>Video</h2>
                         </div>
 
-                        <button onClick={onUploadClick}>Upload</button>
+                        <button
+                          className={`upload-btn ${loading ? 'loading' : ''}`}
+                          onClick={onUploadClick}
+                          disabled={loading}
+                        >
+                          {loading ? 'Uploading...' : 'Upload'}
+                        </button>
                     </div>
 
                     {image && (

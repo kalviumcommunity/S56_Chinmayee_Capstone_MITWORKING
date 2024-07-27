@@ -13,6 +13,7 @@ export default function Login() {
     password: ''
   })
 
+  const [loading, setLoading] = useState(false); 
   const navigate = useNavigate()
 
   const handleChange = (e) => {
@@ -24,6 +25,7 @@ export default function Login() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setLoading(true);
     try {
       const response = await axios.post('https://s56-chinmayee-capstone-mitworking.onrender.com/login', formData);
       if (response.status === 200) {
@@ -55,6 +57,9 @@ export default function Login() {
         toast.error('An unexpected error occurred. Please try again later.');
       }
     }
+    finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -73,7 +78,13 @@ export default function Login() {
               <span>Password</span>
             </div>
 
-            <Link to={"/home"}><button className='login-btn' onClick={handleSubmit}>Login</button></Link>
+            <Link to={"/home"}><button
+              className={`login-btn ${loading ? 'loading' : ''}`}
+              onClick={handleSubmit}
+              disabled={loading} 
+            >
+              {loading ? 'Logging in...' : 'Login'}
+            </button></Link>
             <Link to={"/signup"}><h3 className='signup-text'>Don’t have an account? signup</h3></Link>
           </div>
         </div>

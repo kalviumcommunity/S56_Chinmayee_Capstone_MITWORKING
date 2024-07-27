@@ -83,6 +83,16 @@
     transition: 0.5s ease;
 }
 
+.signup-btn.loading {
+    background-color: #6c757d;
+    cursor: not-allowed;
+}
+
+.signup-btn:disabled {
+    background-color: #6c757d;
+    cursor: not-allowed;
+}
+
 .signup-btn:hover{
     transform: scale(1.1);
 }

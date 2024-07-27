@@ -16,7 +16,7 @@ export default function AboutMe() {
         club: '',
         bio: ''
     });
-
+    const [loading, setLoading] = useState(false);
     const userId = localStorage.getItem("userId"); 
 
     useEffect(() => {
@@ -44,6 +44,7 @@ export default function AboutMe() {
     };
 
     const handleSaveChanges = () => {
+        setLoading(true);
         axios.put(`https://s56-chinmayee-capstone-mitworking.onrender.com/${userId}`, {
             ...inputValues,
             currentUserId: userId
@@ -57,6 +58,9 @@ export default function AboutMe() {
             .catch(error => {
                 console.error('Error updating user:', error);
                 toast.error("Failed to Update ❌")
+            })
+            .finally(() => {
+                setLoading(false);
             });
     };
 
@@ -110,7 +114,13 @@ export default function AboutMe() {
                         <div>
                             <textarea name="bio" value={inputValues.bio} onChange={handleInputChange} required placeholder='Bio'></textarea>
                         </div>
-                        <button onClick={handleSaveChanges}>Save Changes</button>
+                        <button
+                          className={`save-btn ${loading ? 'loading' : ''}`}
+                          onClick={handleSaveChanges}
+                          disabled={loading}
+                        >
+                          {loading ? 'Saving...' : 'Save Changes'}
+                        </button>
                     </div>
                 </div>
             )}
