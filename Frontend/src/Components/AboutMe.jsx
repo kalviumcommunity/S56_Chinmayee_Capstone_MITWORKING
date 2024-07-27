@@ -22,6 +22,7 @@ export default function AboutMe() {
     useEffect(() => {
         axios.get(`https://s56-chinmayee-capstone-mitworking.onrender.com/${userId}`)
             .then(response => {
+                console.log('Fetched user data:', response.data);
                 setInputValues(response.data);
             })
             .catch(error => {
