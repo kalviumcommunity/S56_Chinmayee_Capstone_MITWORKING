@@ -5,7 +5,6 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 
-
 export default function AboutMe() {
     const [openModal, setOpenModal] = useState(false);
     const [inputValues, setInputValues] = useState({
@@ -44,7 +43,10 @@ export default function AboutMe() {
     };
 
     const handleSaveChanges = () => {
-        axios.put(`https://s56-chinmayee-capstone-mitworking.onrender.com/${userId}`, inputValues)
+        axios.put(`https://s56-chinmayee-capstone-mitworking.onrender.com/${userId}`, {
+            ...inputValues,
+            currentUserId: userId
+        })
             .then(response => {
                 console.log('User updated successfully:', response.data);
                 setOpenModal(false);
