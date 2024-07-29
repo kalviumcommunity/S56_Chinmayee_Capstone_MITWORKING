@@ -16,6 +16,7 @@ export default function Followers() {
     const fetchAllUsers = async () => {
       try {
         const response = await axios.get('https://s56-chinmayee-capstone-mitworking.onrender.com/getall');
+        console.log('Fetch all users response:', response.data);
         setAllUsers(response.data);
       } catch (error) {
         console.log('Error fetching users list:', error.response ? error.response.data : error.message);
@@ -25,6 +26,7 @@ export default function Followers() {
     const fetchFollowing = async () => {
       try {
         const response = await axios.get(`https://s56-chinmayee-capstone-mitworking.onrender.com/${userId}`);
+        console.log('Fetch following response:', response.data);
         setFollowing(response.data.following.map(id => id.toString())); 
       } catch (error) {
         console.log('Error fetching following list:', error.response ? error.response.data : error.message);
