@@ -25,6 +25,10 @@ export default function Profile() {
     }
   }, [userId]);
 
+  if (!userData) {
+    return <div>Loading...</div>;
+  }
+
   return (
     <>
       <div className='profile-page'>
