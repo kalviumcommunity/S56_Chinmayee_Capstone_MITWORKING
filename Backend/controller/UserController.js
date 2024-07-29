@@ -1,29 +1,47 @@
 const UserModel = require("../models/userModel.js")
+const PostModel = require("../models/postModel.js");
 const bcrypt = require("bcrypt")
 
 
 // getting a user
+// const getUser = async (req,res)=>{
+//     const id = req.params.id
+
+//     try {
+//         const user = await UserModel.findById(id)
+
+//         if(user){
+//             const {password, ...otherDetails} = user._doc
+//             res.status(200).json(otherDetails)
+//         }
+//         else{
+//             res.status(404).json("No such user exists!")
+//         }    
+//     } catch (error) {
+//         res.status(500).json(error)
+//     }
+// }
+
 const getUser = async (req,res)=>{
     const id = req.params.id
 
     try {
-        const user = await UserModel.findById(id)
-
-        // if(user){
-        //     const safeUser = filterSensitiveData(user);
-        //     res.status(200).json(safeUser)
-        // }4
-        if(user){
-            const {password, ...otherDetails} = user._doc
-            res.status(200).json(otherDetails)
+        const user = await UserModel.findById(id);
+        if (!user) {
+            return res.status(404).json("No such user exists!");
         }
-        else{
-            res.status(404).json("No such user exists!")
-        }    
+
+        const postCount = await PostModel.countDocuments({ userId: id });
+
+        const { password, ...otherDetails } = user._doc;
+        const response = { ...otherDetails, postCount };
+        console.log(response);
+        res.status(200).json(response);
     } catch (error) {
-        res.status(500).json(error)
+        res.status(500).json(error);
     }
 }
+
 
 // getting all users
 const getAllUsers = async (req, res) => {
