@@ -9,7 +9,9 @@ import './Profile.css';
 
 export default function Profile() {
   const [userData, setUserData] = useState(null);
+  const username = localStorage.getItem('username');
   const userId = localStorage.getItem('userId');
+
 
   useEffect(() => {
     if (userId) {
@@ -32,15 +34,15 @@ export default function Profile() {
             <div className='profile-overveiw'>
             
                 <img className='prfPage-img' src={profile} alt={profile} />
-                {/* <h2 className='prfPage-name'>{userData.name}</h2> */}
-                {/* <h2 className='prfPage-username'>@{userData.username}</h2> */}
+                <h2 className='prfPage-name'>Chinmayee Harane</h2>
+                <h2 className='prfPage-username'>@{username}</h2>
 
                 <div className='prfPage-lines'>
-                    {/* <h3 className='prfPage-numOfFollwers'>{userData.followers.length} <br />Followers</h3> */}
+                    <h3 className='prfPage-numOfFollwers'>200<br />Followers</h3>
                     <div className='prfPage-middle-line1'></div>
-                    {/* <h3 className='prfPage-numOfFollwing'>{userData.following.length} <br />Following</h3> */}
+                    <h3 className='prfPage-numOfFollwing'>300<br />Following</h3>
                     <div className='prfPage-middle-line2'></div>
-                    {/* <h3 className='prfPage-numOfPost'>{userData.posts.length}<br/>Posts</h3> */}
+                    <h3 className='prfPage-numOfPost'>5<br/>Posts</h3>
                 </div>
 
             </div>
