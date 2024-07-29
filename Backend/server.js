@@ -1,11 +1,14 @@
 require("dotenv").config();
 const express = require("express");
 const routes = require("./routes/routes.js");
-const postRoutes = require("./routes/postRoutes.js");
 const mongoose = require("mongoose");
 const cors = require('cors')
 const config = require('./config/db.js')
+const postRoutes = require("./routes/postRoutes.js");
 const uploadRoute = require('./routes/uploadRoute.js');
+const ChatRoute = require('./routes/ChatRoute.js');
+const MessageRoute = require('./routes/MessageRoute.js')
+
 
 const app = express();
 const corsOptions ={
@@ -20,6 +23,8 @@ app.use(express.json());
 
 app.use("/", routes);
 app.use("/posts", postRoutes);
+app.use("/chat", ChatRoute);
+app.use("/message", MessageRoute);
 app.use(uploadRoute);
 
 app.use((err, req, res, next) => {
