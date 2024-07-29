@@ -25,6 +25,22 @@ const getUser = async (req,res)=>{
     }
 }
 
+const getUsersByIds = async (req, res) => {
+    const { ids } = req.body;
+
+    try {
+        const users = await UserModel.find({ _id: { $in: ids } });
+        const usersWithoutPasswords = users.map(user => {
+            const { password, ...otherDetails } = user._doc;
+            return otherDetails;
+        });
+        res.status(200).json(usersWithoutPasswords);
+    } catch (error) {
+        res.status(500).json(error);
+    }
+};
+
+
 
 // getting all users
 const getAllUsers = async (req, res) => {
@@ -161,4 +177,4 @@ const unfollowUser = async (req,res)=>{
 
 
 
-module.exports = {getUser, getAllUsers, updateUser, deleteUser, followUser, unfollowUser}
+module.exports = {getUser, getUsersByIds, getAllUsers, updateUser, deleteUser, followUser, unfollowUser}

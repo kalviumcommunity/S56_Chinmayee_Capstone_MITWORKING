@@ -9,18 +9,44 @@ const uploadRoute = require('./routes/uploadRoute.js');
 const ChatRoute = require('./routes/ChatRoute.js');
 const MessageRoute = require('./routes/MessageRoute.js')
 
-
+const http = require('http');
+const { Server } = require('socket.io');
 const app = express();
-const corsOptions ={
-//    origin:'http://localhost:5173',
-   origin:'https://mitworking.netlify.app', 
-   credentials:true,           
-   optionSuccessStatus:200,
-}
+
+const server = http.createServer(app);
+const io = new Server(server, {
+    cors: {
+        origin: 'http://localhost:5173',
+        methods: ['GET', 'POST']
+    },
+});
+
+io.on('connection', (socket) => {
+    console.log('a user connected');
+    
+    socket.on('disconnect', () => {
+        console.log('user disconnected');
+    });
+
+    socket.on('sendMessage', (data) => {
+        io.emit('getMessage', data);
+    });
+
+    socket.on('addUser', (userId) => {
+        console.log(`User connected: ${userId}`);
+        io.emit('getUsers', [{ userId }]);
+    });
+});
+
+// const corsOptions ={
+// //    origin:'http://localhost:5173',
+//    origin:'https://mitworking.netlify.app', 
+//    credentials:true,           
+//    optionSuccessStatus:200,
+// }
 
 app.use(cors())
 app.use(express.json());
-
 app.use("/", routes);
 app.use("/posts", postRoutes);
 app.use("/chat", ChatRoute);
@@ -30,7 +56,7 @@ app.use(uploadRoute);
 app.use((err, req, res, next) => {
     console.error(err.stack);
     res.status(500).send('Something broke!');
-  });
+});
 
 const PORT = config.Port || 3200;
 

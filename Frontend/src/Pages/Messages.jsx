@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import './Messages.css'
 import home from '../assets/home.png'
 import chat from '../assets/chat.png'
@@ -10,9 +10,93 @@ import profile1 from  '../assets/profile1.jpg'
 import profile2 from '../assets/profile2.jpg'
 import profile3 from '../assets/profile4.jpg'
 import {Link} from 'react-router-dom'
+import axios from 'axios';
+import { io } from 'socket.io-client';
 
 
 export default function Messages() {
+  const [contacts, setContacts] = useState([]);
+  const [currentChat, setCurrentChat] = useState(null);
+  const [messages, setMessages] = useState([]);
+  const [newMessage, setNewMessage] = useState("");
+  const [onlineUsers, setOnlineUsers] = useState([]);
+  const socket = useRef();
+
+  const userId = localStorage.getItem('userId');
+
+  useEffect(() => {
+    socket.current = io('https://s56-chinmayee-capstone-mitworking.onrender.com'); 
+    socket.current.on('getMessage', (data) => {
+      setMessages((prev) => [...prev, data]);
+    });
+    socket.current.on('getUsers', (users) => {
+      setOnlineUsers(users);
+    });
+
+    socket.current.emit('addUser', userId);
+  }, []);
+
+  useEffect(() => {
+    const fetchContacts = async () => {
+      try {
+        const res = await axios.get(`https://s56-chinmayee-capstone-mitworking.onrender.com/${userId}`);
+        const followingIds = res.data.following;
+
+        if (followingIds.length > 0) {
+          const usersRes = await axios.post('https://s56-chinmayee-capstone-mitworking.onrender.com/user/getByIds', {
+            ids: followingIds,
+          });
+          setContacts(usersRes.data);
+        }
+      } catch (error) {
+        console.log('Error fetching contacts:', error);
+      }
+    };
+
+    fetchContacts();
+  }, [userId]);
+
+  useEffect(() => {
+    const fetchMessages = async () => {
+      if (currentChat) {
+        try {
+          const res = await axios.get(`https://s56-chinmayee-capstone-mitworking.onrender.com/message/${currentChat._id}`);
+          setMessages(res.data);
+        } catch (error) {
+          console.log('Error fetching messages:', error);
+        }
+      }
+    };
+
+    fetchMessages();
+  }, [currentChat]);
+
+  const handleSendMessage = async (e) => {
+    e.preventDefault();
+    const message = {
+      chatId: currentChat._id,
+      senderId: userId,
+      text: newMessage,
+    };
+
+    try {
+      const res = await axios.post('https://s56-chinmayee-capstone-mitworking.onrender.com/message', message);
+      setMessages([...messages, res.data]);
+      socket.current.emit('sendMessage', {
+        chatId: currentChat._id,
+        senderId: userId,
+        text: newMessage,
+      });
+      setNewMessage('');
+    } catch (error) {
+      console.log('Error sending message:', error);
+    }
+  };
+
+  const isUserOnline = (contactId) => {
+    return onlineUsers.some((user) => user.userId === contactId);
+  };
+
   return (
     <div className='msg-page'>
       {/* navbar */}
@@ -32,73 +116,49 @@ export default function Messages() {
         {/* left side */}
         <div className='contacts'>
             <h2>Messages</h2>
-            <div className='prev-contact'>
-                <img src={profile1} alt="profile of previous person" />
-                <div>
-                    <h3>Shriyansh</h3>
-                    <h4>Offline</h4>
-                </div>
+            {contacts.map((contact) => (
+            <div key={contact._id} className={`prev-contact ${currentChat && currentChat._id === contact._id ? 'active' : ''}`} onClick={() => setCurrentChat(contact)}>
+              <img src={contact.profilePicture || profile1} alt="profile of contact" />
+              <div>
+                <h3>{contact.username}</h3>
+                <h4>{isUserOnline(contact._id) ? 'Online' : 'Offline'}</h4>
+              </div>
             </div>
-            <div className='prev-contact'>
-                <img src={profile2} alt="profile of previous person" />
-                <div>
-                    <h3>Paras</h3>
-                    <h4>Offline</h4>
-                </div>
-            </div>
-            <div className='prev-contact'>
-                <img src={profile3} alt="profile of previous person" />
-                <div>
-                    <h3>Ayush</h3>
-                    <h4>Offline</h4>
-                </div>
-            </div>
+            ))}
+
         </div>
         
-        {/* right side */}
+        {/* right side */} 
+
         <div className='chat-section'>
-            <div className='chat-info'>
-                <img src={profile1} alt="profile of current person" />
+          {currentChat ? (
+            <>
+              <div className='chat-info'>
+                <img src={currentChat.profilePicture || profile1} alt="profile of current contact" />
                 <div className='curr-contact'>
-                    <h3>Ayush</h3>
-                    <h4>Online</h4>
-                </div>
-            </div>
-
-            <div className='msg-div'>
-
-              <div className='msg1'>
-                <div className='sent-msg'>
-                  <p>Hey there how was your weekend?</p>
-                  <span className='msg-time'>10:00 AM</span>
+                  <h3>{currentChat.username}</h3>
+                  <h4>{isUserOnline(currentChat._id) ? 'Online' : 'Offline'}</h4>
                 </div>
               </div>
 
-              <div className='msg2'>
-                <div className='received-msg'>
-                    <p>Not bad, thanks for asking. Spent most of it catching up on some reading. </p>
-                    <span className='msg-time'>10:01 AM</span>
-                </div>
-              </div>
+              <div className='msg-div'>
+                {messages.map((msg, index) => (
+                  <div key={index} className={msg.senderId === userId ? 'msg1' : 'msg2'}>
+                    <div className={msg.senderId === userId ? 'sent-msg' : 'received-msg'}>
+                      <p>{msg.text}</p>
+                      <span className='msg-time'>{new Date(msg.createdAt).toLocaleTimeString()}</span>
+                    </div>
+                  </div>
+                ))}
 
-              <div className='msg2'>
-                <div className='received-msg'>
-                    <p> How about you?</p>
-                    <span className='msg-time'>10:01 AM</span>
-                </div>
+                <form onSubmit={handleSendMessage}>
+                  <input type="text" placeholder='Type your message...' value={newMessage} onChange={(e) => setNewMessage(e.target.value)} />
+                </form>
               </div>
-
-              <div className='msg1'>
-                <div className='sent-msg'>
-                  <p>Pretty chill, went for a hike with some friends and then binged a new series on Netflix.</p>
-                  <span className='msg-time'>10:02 AM</span>
-                </div>
-              </div>
-              
-              {/* message input */}
-              <input type="text" placeholder='Type your message...'/>
-
-            </div>
+            </>
+          ) : (
+            <span className='no-conversation-text'>Open a conversation to start a chat.</span>
+          )}
         </div>
 
       </div>
