@@ -9,9 +9,17 @@ const getUser = async (req,res)=>{
     try {
         const user = await UserModel.findById(id)
 
-        if(user){
-            const safeUser = filterSensitiveData(user);
-            res.status(200).json(safeUser)
+        // if(user){
+        //     const safeUser = filterSensitiveData(user);
+        //     res.status(200).json(safeUser)
+        // }4
+        if (user) {
+            const userPosts = await PostModel.find({ userId: id });
+            const safeUser = {
+              ...filterSensitiveData(user),
+              posts: userPosts,
+            };
+            res.status(200).json(safeUser);
         }
         else{
             res.status(404).json("No such user exists!")
