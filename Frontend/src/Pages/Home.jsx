@@ -71,8 +71,6 @@ export default function Home() {
 
         {/* Posts container */}
         <div className='posts-container'>
-          <input className='search-box' placeholder='Search for people' type="text" />
-
           {/* Render posts */}
           {posts.map(post => (
             <div key={post._id} className='post'>
@@ -110,4 +108,4 @@ export default function Home() {
       </div>
     </>
   );
-}
+}  

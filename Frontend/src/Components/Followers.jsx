@@ -11,6 +11,7 @@ export default function Followers() {
   const userId = localStorage.getItem("userId")
   const [allUsers, setAllUsers] = useState([]);
   const [following, setFollowing] = useState([]);
+  const [searchTerm, setSearchTerm] = useState('');
 
   useEffect(() => {
     const fetchAllUsers = async () => {
@@ -58,11 +59,16 @@ export default function Followers() {
     }
   };
 
+  const filteredUsers = allUsers.filter(user =>
+    user.username.toLowerCase().includes(searchTerm.toLowerCase())
+  );
+
   return (
     <div className='followers-container'>
       <h3 className='heading'>People you may know</h3>
+      <input className='search-box' placeholder='Search for people' type='text' value={searchTerm} onChange={(e) => setSearchTerm(e.target.value)} />
       <div className='container'>
-        {allUsers.map(user => (
+        {filteredUsers.map(user => (
           <div className='follower' key={user._id}>
             <img className='follower-prf' src={user.profilePicture || defaultPrf} alt={user.username} />
             <div className='name'>
