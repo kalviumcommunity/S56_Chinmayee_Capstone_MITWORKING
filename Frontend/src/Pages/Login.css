@@ -83,6 +83,16 @@
     transition: 0.5s ease;
 }
 
+.login-btn.loading {
+    background-color: #6c757d;
+    cursor: not-allowed;
+  }
+  
+.login-btn:disabled {
+    background-color: #6c757d;
+    cursor: not-allowed;
+}
+
 .login-btn:hover{
     transform: scale(1.1);
 }

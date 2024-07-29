@@ -97,6 +97,16 @@
     border-radius: 3px;
 }
 
+.upload-icons button.loading {
+    background-color: #6c757d;
+    cursor: not-allowed;
+  }
+  
+.upload-icons button:disabled {
+    background-color: #6c757d;
+    cursor: not-allowed;
+}
+
 .upload-icons button:hover{
     transform: scale(1.1);
 }

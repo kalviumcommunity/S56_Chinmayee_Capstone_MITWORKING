@@ -4,6 +4,8 @@ import message from '../assets/messenger.png'
 import share from '../assets/share.png'
 import './Myposts.css'
 import axios from 'axios'
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 
 export default function MyPosts() {
@@ -11,6 +13,7 @@ export default function MyPosts() {
   const [isEditing, setIsEditing] = useState(false);
   const [editPostId, setEditPostId] = useState(null);
   const [editDescription, setEditDescription] = useState('');
+  const [loading, setLoading] = useState(false);
 
   const userId = localStorage.getItem('userId');
   useEffect(() => {
@@ -32,14 +35,18 @@ export default function MyPosts() {
   const handleDelete = async (postId) => {
     const confirmDelete = window.confirm('Are you sure you want to delete this post?');
     if (confirmDelete) {
+      setLoading(true);
       try {
         await axios.delete(`https://s56-chinmayee-capstone-mitworking.onrender.com/posts/${postId}`, {
           data: { userId }
         });
         setPosts(posts.filter((post) => post._id !== postId));
-        alert("Post Deleted ✅")
+        toast.success("Post Deleted ✅")
       } catch (error) {
         console.log('Error deleting post:', error.response ? error.response.data : error.message);
+      }
+      finally {
+        setLoading(false); 
       }
     }
   };
@@ -52,6 +59,7 @@ export default function MyPosts() {
   };
 
   const handleSaveEdit = async () => {
+    setLoading(true);
     try {
       await axios.put(`https://s56-chinmayee-capstone-mitworking.onrender.com/posts/${editPostId}`, {
         userId,
@@ -65,9 +73,12 @@ export default function MyPosts() {
       setIsEditing(false);
       setEditPostId(null);
       setEditDescription('');
-      alert("Post Updated ✅")
+      toast.success("Post Updated ✅")
     } catch (error) {
       console.log('Error updating post:', error.response ? error.response.data : error.message);
+      toast.error('Failed to update post ❌');
+    } finally {
+      setLoading(false); 
     }
   };
 
@@ -101,22 +112,27 @@ export default function MyPosts() {
             
             <div className='prfPage-buttons'>
               {isEditing && post._id === editPostId ? (
-                <button className='prfPage-save-btn' onClick={handleSaveEdit}>
-                  Save
+                <button className={`prfPage-save-btn ${loading ? 'loading' : ''}`} onClick={handleSaveEdit} disabled={loading}>
+                  {loading ? 'Saving...' : 'Save'}
                 </button>
               ) : (
                 <button className='prfPage-edit-btn' onClick={() => handleEdit(post._id)}>
                   Edit
                 </button>
               )}
-              <button className='prfPage-delete-btn' onClick={() => handleDelete(post._id)}>
-                Delete
-              </button>
+              <button
+                  className={`prfPage-delete-btn ${loading ? 'loading' : ''}`}
+                  onClick={() => handleDelete(post._id)}
+                  disabled={loading}
+                >
+                  {loading ? 'Deleting...' : 'Delete'}
+                </button>
             </div>
         </div>
         ))} 
 
       </div>
+      <ToastContainer/>
     </div>
   )
 }

@@ -15,6 +15,7 @@ import axios from 'axios'
 export default function Home() {
   const [posts, setPosts] = useState([]);
   const [likedPosts, setLikedPosts] = useState({});
+  const [userData, setUserData] = useState(null);
 
   const userId = localStorage.getItem('userId');
 
@@ -45,6 +46,23 @@ export default function Home() {
     }
   };
 
+
+  useEffect(() => {
+    if (userId) {
+      axios.get(`https://s56-chinmayee-capstone-mitworking.onrender.com/${userId}`)
+        .then(response => {
+          setUserData(response.data);
+        })
+        .catch(error => {
+          console.error('Error fetching user data:', error);
+        });
+    }
+  }, [userId]);
+
+  if (!userData) {
+    return <div>Loading...</div>;
+  }
+
   return (
     <>
       <div className='home-box'>
@@ -53,8 +71,6 @@ export default function Home() {
 
         {/* Posts container */}
         <div className='posts-container'>
-          <input className='search-box' placeholder='Search for people' type="text" />
-
           {/* Render posts */}
           {posts.map(post => (
             <div key={post._id} className='post'>
@@ -76,13 +92,13 @@ export default function Home() {
         {/* Profile card */}
         <div className='profile-card'>
           <img className='prf-img' src={profile} alt="" />
-          <h2 className='prf-name'>Chinmayee Harane</h2>
-          <h2 className='prf-username'>{localStorage.getItem("username")}</h2>
+          <h2 className='prf-name'>{userData.name}</h2>
+          <h2 className='prf-username'>@{localStorage.getItem("username")}</h2>
           <div className='lines'>
             <div className='top-line'></div>
-            <h3 className='numOfFollwers'>1000 <br />Followers</h3>
+            <h3 className='numOfFollwers'>{userData.followers.length} <br />Followers</h3>
             <div className='middle-line'></div>
-            <h3 className='numOfFollwing'>300 <br />Following</h3>
+            <h3 className='numOfFollwing'>{userData.following.length} <br />Following</h3>
             <div className='bottom-line'></div>
           </div>
           <Link to={'/profile'}>
@@ -92,4 +108,4 @@ export default function Home() {
       </div>
     </>
   );
-}
+}  

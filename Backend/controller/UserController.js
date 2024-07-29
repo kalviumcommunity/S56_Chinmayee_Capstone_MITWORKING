@@ -1,37 +1,64 @@
 const UserModel = require("../models/userModel.js")
+const PostModel = require("../models/postModel.js");
 const bcrypt = require("bcrypt")
-const filterSensitiveData = require("../utils/filterSensitiveData");
 
 
 // getting a user
+
 const getUser = async (req,res)=>{
     const id = req.params.id
 
     try {
-        const user = await UserModel.findById(id)
-
-        if(user){
-            const safeUser = filterSensitiveData(user);
-            res.status(200).json(safeUser)
+        const user = await UserModel.findById(id);
+        if (!user) {
+            return res.status(404).json("No such user exists!");
         }
-        else{
-            res.status(404).json("No such user exists!")
-        }    
+
+        const postCount = await PostModel.countDocuments({ userId: id });
+
+        const { password, ...otherDetails } = user._doc;
+        const response = { ...otherDetails, postCount };
+        console.log(response);
+        res.status(200).json(response);
     } catch (error) {
-        res.status(500).json(error)
+        res.status(500).json(error);
     }
 }
 
-// getting all users
-const getAllUsers = async (req, res) => {
+const getUsersByIds = async (req, res) => {
+    const { ids } = req.body;
+
     try {
-        const users = await UserModel.find();
-        const safeUsers = users.map(user => filterSensitiveData(user));  
-        res.status(200).json(safeUsers);
+        const users = await UserModel.find({ _id: { $in: ids } });
+        const usersWithoutPasswords = users.map(user => {
+            const { password, ...otherDetails } = user._doc;
+            return otherDetails;
+        });
+        res.status(200).json(usersWithoutPasswords);
     } catch (error) {
         res.status(500).json(error);
     }
 };
+
+
+
+// getting all users
+const getAllUsers = async (req, res) => {
+    try {
+        // console.log('Fetching all users...');
+        const users = await UserModel.find();
+        // console.log('Users fetched:', users); 
+        const usersWithoutPasswords = users.map(user => {
+            const { password, ...otherDetails } = user._doc;
+            return otherDetails;
+        });
+        res.status(200).json(usersWithoutPasswords); 
+    } catch (error) {
+        console.error('Error fetching all users:', error); 
+        res.status(500).json(error);
+    }
+};
+
 
 
 // updating the details
@@ -150,4 +177,4 @@ const unfollowUser = async (req,res)=>{
 
 
 
-module.exports = {getUser, getAllUsers, updateUser, deleteUser, followUser, unfollowUser}
+module.exports = {getUser, getUsersByIds, getAllUsers, updateUser, deleteUser, followUser, unfollowUser}

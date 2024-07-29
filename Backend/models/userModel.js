@@ -15,7 +15,8 @@ const userSchema = new mongoose.Schema({
     club: {type: String},
     bio:{type: String},
     followers: [],
-    following: []
+    following: [],
+    postCount: {type: Number}
 })
 
 

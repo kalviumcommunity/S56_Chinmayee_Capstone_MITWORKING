@@ -2,6 +2,8 @@ import {useState, useEffect} from 'react'
 import './Followers.css'
 import axios from 'axios'
 import defaultPrf from  '../assets/default.png'
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 
 export default function Followers() {
@@ -9,11 +11,13 @@ export default function Followers() {
   const userId = localStorage.getItem("userId")
   const [allUsers, setAllUsers] = useState([]);
   const [following, setFollowing] = useState([]);
+  const [searchTerm, setSearchTerm] = useState('');
 
   useEffect(() => {
     const fetchAllUsers = async () => {
       try {
         const response = await axios.get('https://s56-chinmayee-capstone-mitworking.onrender.com/getall');
+        console.log('Fetch all users response:', response.data);
         setAllUsers(response.data);
       } catch (error) {
         console.log('Error fetching users list:', error.response ? error.response.data : error.message);
@@ -23,6 +27,7 @@ export default function Followers() {
     const fetchFollowing = async () => {
       try {
         const response = await axios.get(`https://s56-chinmayee-capstone-mitworking.onrender.com/${userId}`);
+        console.log('Fetch following response:', response.data);
         setFollowing(response.data.following.map(id => id.toString())); 
       } catch (error) {
         console.log('Error fetching following list:', error.response ? error.response.data : error.message);
@@ -41,24 +46,29 @@ export default function Followers() {
           currentUserId: userId,
         });
         setFollowing(following.filter(userId => userId !== id));
-        alert('User unfollowed successfully! ✅');
+        toast.success('User unfollowed successfully! ✅');
       } else {
         await axios.put(`https://s56-chinmayee-capstone-mitworking.onrender.com/${id}/follow`, {
           currentUserId: userId,
         });
         setFollowing([...following, id]);
-        alert('User followed successfully! ✅');
+        toast.success('User followed successfully! ✅');
       }
     } catch (error) {
       console.log('Error updating follow status:', error.response ? error.response.data : error.message);
     }
   };
 
+  const filteredUsers = allUsers.filter(user =>
+    user.username.toLowerCase().includes(searchTerm.toLowerCase())
+  );
+
   return (
     <div className='followers-container'>
       <h3 className='heading'>People you may know</h3>
+      <input className='search-box' placeholder='Search for people' type='text' value={searchTerm} onChange={(e) => setSearchTerm(e.target.value)} />
       <div className='container'>
-        {allUsers.map(user => (
+        {filteredUsers.map(user => (
           <div className='follower' key={user._id}>
             <img className='follower-prf' src={user.profilePicture || defaultPrf} alt={user.username} />
             <div className='name'>
@@ -71,6 +81,7 @@ export default function Followers() {
           </div>
         ))}
       </div>
+      <ToastContainer/>
     </div>
   );
 }

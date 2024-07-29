@@ -149,6 +149,16 @@
     transition: 0.5s ease;
 }
 
+.modal-content button.loading{
+    background-color: #6c757d;
+    cursor: not-allowed;
+  }
+  
+.modal-content button:disabled {
+    background-color: #6c757d;
+    cursor: not-allowed;
+}
+
 .modal-content button:hover{
     transform: scale(1.1);
 }

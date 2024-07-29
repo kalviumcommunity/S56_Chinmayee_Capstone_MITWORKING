@@ -31,13 +31,13 @@
 }
 
 .search-box{
-    margin: 2vh 0 4vh 0;
-    width: 25vw;
-    height: 6vh;
+    margin: 2vh 0 0 0;
+    width: 20vw;
+    height: 4vh;
     border: 0px;
-    font-size: 15px;
+    font-size: 13px;
     text-align: center;
-    border-radius: 4px;
+    border-radius: 3px;
     border: 2px solid var(--border);
     color: var(--color1);
     outline: none;

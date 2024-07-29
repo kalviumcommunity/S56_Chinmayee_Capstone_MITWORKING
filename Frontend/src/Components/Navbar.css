@@ -27,6 +27,12 @@
     border: 1.5px solid var(--color1);
 }
 
+.nav-content.active {
+    background-color: var(--white); 
+    border-radius: 6px; 
+    border: 1.5px solid var(--color1);
+}
+
 .icon{
     width: 25px;
     height: 25px;

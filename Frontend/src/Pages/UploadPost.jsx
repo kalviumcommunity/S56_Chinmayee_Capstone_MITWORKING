@@ -8,11 +8,14 @@ import profile from '../assets/profile3.jpg';
 import photo from '../assets/image.png';
 import upload from '../assets/upload.png';
 import axios from 'axios';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 export default function UploadPost() {
     const [caption, setCaption] = useState('');
     const [file, setFile] = useState(null);
     const [image, setImage] = useState(null)
+    const [loading, setLoading] = useState(false);
     const fileInputRef = useRef();
 
 
@@ -30,10 +33,11 @@ export default function UploadPost() {
     const onUploadClick = async () => {
         if (!file || !caption) {
             console.error('Please select a file and enter a caption.');
-            alert("Please select a file and enter a caption.😊")
+            toast.error("Please select a file and enter a caption.😊")
             return;
         }
 
+        setLoading(true);
         const formData = new FormData();
         formData.append('file', file);
         formData.append('caption', caption);
@@ -46,13 +50,14 @@ export default function UploadPost() {
                 },
             });
             console.log('File uploaded:', response.data.url);
-            alert('Post uploaded ✅');
+            toast.success('Post uploaded ✅');
             setCaption('');
             setFile(null);
         } catch (error) {
             console.error('Error uploading file:', error);
-            alert('Error uploading file ❌');
-
+            toast.error('Error uploading file ❌');
+        } finally {
+            setLoading(false); // Reset loading state
         }
     };
 
@@ -93,7 +98,13 @@ export default function UploadPost() {
                             <h2>Video</h2>
                         </div>
 
-                        <button onClick={onUploadClick}>Upload</button>
+                        <button
+                          className={`upload-btn ${loading ? 'loading' : ''}`}
+                          onClick={onUploadClick}
+                          disabled={loading}
+                        >
+                          {loading ? 'Uploading...' : 'Upload'}
+                        </button>
                     </div>
 
                     {image && (
@@ -107,6 +118,7 @@ export default function UploadPost() {
             </div>
 
             <AboutMe />
+            <ToastContainer/>
         </div>
     );
 }

@@ -7,8 +7,7 @@ import Signup from './Pages/Signup'
 import Profile from './Pages/Profile'
 import UploadPost from './Pages/UploadPost'
 import Messages from './Pages/Messages'
-import Theme from './Pages/Theme'
-
+import Theme from './Pages/Theme.jsx'
 
 function App() {
 
