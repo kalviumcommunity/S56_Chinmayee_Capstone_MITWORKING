@@ -1,3 +1,6 @@
+const http = require('http');
+const { Server } = require('socket.io');
+
 require("dotenv").config();
 const express = require("express");
 const routes = require("./routes/routes.js");
@@ -9,8 +12,6 @@ const uploadRoute = require('./routes/uploadRoute.js');
 const ChatRoute = require('./routes/ChatRoute.js');
 const MessageRoute = require('./routes/MessageRoute.js')
 
-const http = require('http');
-const { Server } = require('socket.io');
 const app = express();
 
 const server = http.createServer(app);

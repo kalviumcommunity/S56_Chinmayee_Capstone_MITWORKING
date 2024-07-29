@@ -43,7 +43,7 @@ export default function Messages() {
         const followingIds = res.data.following;
 
         if (followingIds.length > 0) {
-          const usersRes = await axios.post('https://s56-chinmayee-capstone-mitworking.onrender.com/user/getByIds', {
+          const usersRes = await axios.post('https://s56-chinmayee-capstone-mitworking.onrender.com/getByIds', {
             ids: followingIds,
           });
           setContacts(usersRes.data);
