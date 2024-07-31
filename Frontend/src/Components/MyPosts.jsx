@@ -1,7 +1,5 @@
 import {useState, useEffect} from 'react'
 import heart from '../assets/heart.png'
-import message from '../assets/messenger.png'
-import share from '../assets/share.png'
 import './Myposts.css'
 import axios from 'axios'
 import { ToastContainer, toast } from 'react-toastify';
@@ -92,8 +90,6 @@ export default function MyPosts() {
 
             <div className='prfPage-post-icons'>
               <img className='like-icon prfPage-post-icon' src={heart} alt="heart" />
-              <img className='comment-icon prfPage-post-icon' src={message} alt="message" />
-              <img className='share-icon prfPage-post-icon' src={share} alt="share" />
             </div>
 
             <h5 className='prfPage-likes'>{post.likes.length} Likes</h5>
