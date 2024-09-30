@@ -7,7 +7,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import {GoogleLogin, GoogleOAuthProvider} from "@react-oauth/google"
 
-const clientID = "http://932394916321-h2fn24qhdeb8aa52bvf1q0dgq945e01b.apps.googleusercontent.com"
+const clientID = "932394916321-h2fn24qhdeb8aa52bvf1q0dgq945e01b.apps.googleusercontent.com"
 
 export default function Signup() {
   const [formData, setFormData] = useState({

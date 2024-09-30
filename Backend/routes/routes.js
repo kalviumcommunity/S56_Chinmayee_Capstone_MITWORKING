@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router()
 const { loginUser, registerUser} = require('../controller/AuthController.js');
+const { sendOTP, verifyOTP } = require('../controller/OTPController.js');
 const {getUser, getUsersByIds, getAllUsers, updateUser, deleteUser, followUser, unfollowUser} = require("../controller/UserController.js")
 
 // authentication
@@ -17,5 +18,9 @@ router.delete('/:id', deleteUser)
 // user follow and unfollow
 router.put('/:id/follow', followUser)
 router.put('/:id/unfollow', unfollowUser)
+
+// OTP
+router.post("/send-otp", sendOTP); 
+router.post("/verify-otp", verifyOTP);
 
 module.exports = router ; 
