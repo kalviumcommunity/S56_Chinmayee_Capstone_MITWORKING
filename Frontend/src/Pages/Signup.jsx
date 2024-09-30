@@ -5,6 +5,9 @@ import axios from 'axios';
 import Carousel from '../Components/Carousel';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import {GoogleLogin, GoogleOAuthProvider} from "@react-oauth/google"
+
+const clientID = "http://932394916321-h2fn24qhdeb8aa52bvf1q0dgq945e01b.apps.googleusercontent.com"
 
 export default function Signup() {
   const [formData, setFormData] = useState({
@@ -13,7 +16,8 @@ export default function Signup() {
     password: ''
   });
 
-  const [loading, setLoading] = useState(false); 
+  const [loading, setLoading] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(false); 
   const navigate = useNavigate();
 
   const handleChange = (e) => {
@@ -21,6 +25,17 @@ export default function Signup() {
       ...formData,
       [e.target.name]: e.target.value
     });
+  };
+
+  const onSuccess = (res) => {
+    console.log("LOGIN SUCCESS! Current User: ", res.profileObj);
+    alert("Google Signup Successful!");
+    setIsLoggedIn(true);
+    
+    setTimeout(() => {
+      
+      navigate("/"); 
+    }, 2000);
   };
 
   const handleSubmit = async (e) => {
@@ -91,6 +106,10 @@ export default function Signup() {
             <button className={`signup-btn ${loading ? 'loading' : ''}`} onClick={handleSubmit}  disabled={loading}  >
               {loading ? 'Signing up...' : 'Sign up'}
             </button>
+
+            <GoogleOAuthProvider clientId={clientID}>
+          <GoogleLogin onSuccess={onSuccess} text="signup_with" />
+        </GoogleOAuthProvider>
 
             <Link to={'/'}>
               <h3 className="login-text">Already have an account? Login</h3>
