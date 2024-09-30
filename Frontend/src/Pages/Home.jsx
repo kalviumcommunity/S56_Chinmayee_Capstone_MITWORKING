@@ -71,6 +71,7 @@ export default function Home() {
           {/* Render posts */}
           {posts.map(post => (
             <div key={post._id} className='post'>
+              
               <img className='post-img' src={post.image} alt={post.description} />
               <div className='post-icons'>
               <img className='like-icon post-icon' src={likedPosts[post._id] ? favorite : heart}  alt="heart"  onClick={() => handleLike(post._id)}  />
