@@ -47,12 +47,7 @@ export default function Navbar() {
             <img className='messages-icon icon' src={chat} alt="messages-icon" />
             <h2 className='nav-text'>Messages</h2>
         </Link>
-
-        <Link to={'/theme'} className={`nav-content theme ${getActiveClass('/theme')}`}>
-            <img className='theme-icon icon' src={theme} alt="theme-icon" />
-            <h2 className='nav-text'>Theme</h2>
-        </Link>
-
+        
         <button className='logout-btn' onClick={handleLogout}>Logout</button>      </nav>
     </>
   )

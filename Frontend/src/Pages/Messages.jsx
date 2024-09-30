@@ -6,9 +6,7 @@ import edit from '../assets/edit.png'
 import theme from '../assets/theme.png'
 import profile from '../assets/profile-user.png'
 import logo from '../assets/logo.png'
-import profile1 from  '../assets/profile1.jpg'
-import profile2 from '../assets/profile2.jpg'
-import profile3 from '../assets/profile4.jpg'
+import defaultPrf from  '../assets/default.png'
 import {Link} from 'react-router-dom'
 import axios from 'axios';
 import { io } from 'socket.io-client';
@@ -27,14 +25,16 @@ export default function Messages() {
   useEffect(() => {
     socket.current = io('https://s56-chinmayee-capstone-mitworking.onrender.com'); 
     socket.current.on('getMessage', (data) => {
-      setMessages((prev) => [...prev, data]);
+      if (currentChat && currentChat._id === data.chatId) {
+        setMessages((prev) => [...prev, data]);
+      }
     });
     socket.current.on('getUsers', (users) => {
       setOnlineUsers(users);
     });
 
     socket.current.emit('addUser', userId);
-  }, []);
+  }, [currentChat]);
 
   useEffect(() => {
     const fetchContacts = async () => {
@@ -76,17 +76,14 @@ export default function Messages() {
     const message = {
       chatId: currentChat._id,
       senderId: userId,
+      receiverId: currentChat.members.find((id) => id !== userId),
       text: newMessage,
     };
 
     try {
       const res = await axios.post('https://s56-chinmayee-capstone-mitworking.onrender.com/message', message);
       setMessages([...messages, res.data]);
-      socket.current.emit('sendMessage', {
-        chatId: currentChat._id,
-        senderId: userId,
-        text: newMessage,
-      });
+      socket.current.emit('sendMessage', message);
       setNewMessage('');
     } catch (error) {
       console.log('Error sending message:', error);
@@ -118,7 +115,7 @@ export default function Messages() {
             <h2>Messages</h2>
             {contacts.map((contact) => (
             <div key={contact._id} className={`prev-contact ${currentChat && currentChat._id === contact._id ? 'active' : ''}`} onClick={() => setCurrentChat(contact)}>
-              <img src={contact.profilePicture || profile1} alt="profile of contact" />
+              <img src={contact.profilePicture || defaultPrf} alt="profile of contact" />
               <div>
                 <h3>{contact.username}</h3>
                 <h4>{isUserOnline(contact._id) ? 'Online' : 'Offline'}</h4>
@@ -130,11 +127,11 @@ export default function Messages() {
         
         {/* right side */} 
 
-        <div className='chat-section'>
+        {/* <div className='chat-section'>
           {currentChat ? (
             <>
               <div className='chat-info'>
-                <img src={currentChat.profilePicture || profile1} alt="profile of current contact" />
+                <img src={currentChat.profilePicture || defaultPrf} alt="profile of current contact" />
                 <div className='curr-contact'>
                   <h3>{currentChat.username}</h3>
                   <h4>{isUserOnline(currentChat._id) ? 'Online' : 'Offline'}</h4>
@@ -158,6 +155,40 @@ export default function Messages() {
             </>
           ) : (
             <span className='no-conversation-text'>Open a conversation to start a chat.</span>
+          )}
+        </div> */}
+
+        <div className='chat-section'>
+          {currentChat ? (
+            <>
+              <div className='chat-info'>
+                <img src={currentChat.profilePicture || defaultPrf} alt="profile of current contact" />
+                <div className='curr-contact'>
+                  <h3>{currentChat.username}</h3>
+                  <h4>{isUserOnline(currentChat._id) ? 'Online' : 'Offline'}</h4>
+                </div>
+              </div>
+
+              <div className='msg-div'>
+                {messages.map((msg, index) => (
+                  <div key={index} className={msg.senderId === userId ? 'msg-sent' : 'msg-received'}>
+                    <p>{msg.text}</p>
+                  </div>
+                ))}
+              </div>
+
+              <form className='send-form' onSubmit={handleSendMessage}>
+                <input 
+                  type="text" 
+                  placeholder='Type a message...' 
+                  value={newMessage} 
+                  onChange={(e) => setNewMessage(e.target.value)} 
+                />
+                <button type='submit'>Send</button>
+              </form>
+            </>
+          ) : (
+            <span className='no-conversation'>Open a conversation to start a chat.</span>
           )}
         </div>
 
