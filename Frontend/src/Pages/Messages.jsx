@@ -6,7 +6,7 @@ import edit from '../assets/edit.png'
 import theme from '../assets/theme.png'
 import profile from '../assets/profile-user.png'
 import logo from '../assets/logo.png'
-import defaultPrf from  '../assets/default.png'
+import profile from '../assets/default.png'
 import {Link} from 'react-router-dom'
 import axios from 'axios';
 import { io } from 'socket.io-client';
