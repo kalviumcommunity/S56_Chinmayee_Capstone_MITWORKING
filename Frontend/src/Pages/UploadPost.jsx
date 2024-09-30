@@ -4,7 +4,7 @@ import Followers from '../Components/Followers';
 import AboutMe from '../Components/AboutMe';
 import MyPosts from '../Components/MyPosts';
 import './UploadPost.css';
-import profile from '../assets/profile3.jpg';
+import profile from '../assets/default.png'
 import photo from '../assets/image.png';
 import upload from '../assets/upload.png';
 import axios from 'axios';
