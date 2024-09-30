@@ -4,9 +4,6 @@ import Navbar from '../Components/Navbar'
 import Followers from '../Components/Followers'
 import heart from '../assets/heart.png'
 import favorite from '../assets/favorite.png'
-
-import message from '../assets/messenger.png'
-import share from '../assets/share.png'
 import profile from '../assets/profile3.jpg'
 import { Link } from 'react-router-dom'
 import axios from 'axios'
@@ -77,8 +74,6 @@ export default function Home() {
               <img className='post-img' src={post.image} alt={post.description} />
               <div className='post-icons'>
               <img className='like-icon post-icon' src={likedPosts[post._id] ? favorite : heart}  alt="heart"  onClick={() => handleLike(post._id)}  />
-                <img className='comment-icon post-icon' src={message} alt="message" />
-                <img className='share-icon post-icon' src={share} alt="share" />
               </div>
               <h5 className='likes'>{post.likes.length} Likes</h5>
               <div className='caption'>
