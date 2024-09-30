@@ -47,7 +47,11 @@ export default function Navbar() {
             <img className='messages-icon icon' src={chat} alt="messages-icon" />
             <h2 className='nav-text'>Messages</h2>
         </Link>
+<<<<<<< HEAD
+        
+=======
 
+>>>>>>> bde25b5f83f3eebda41b11c2cbbccc0ae6db7fce
         <button className='logout-btn' onClick={handleLogout}>Logout</button>      </nav>
     </>
   )

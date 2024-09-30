@@ -1,15 +1,11 @@
 const mongoose = require('mongoose')
 
 const MessageSchema = mongoose.Schema({
-        chatId: { 
-            type: String,
-        },
-        senderId: { 
-            type: String,
-        },
-        text: { 
-            type: String,
-        },
+        chatId: { type: mongoose.Schema.Types.ObjectId, ref: 'Chat' },
+        senderId: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
+        receiverId: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
+        text: { type: String, required: true },
+        createdAt: { type: Date, default: Date.now },
     },
     {
         timestamps:  true,
