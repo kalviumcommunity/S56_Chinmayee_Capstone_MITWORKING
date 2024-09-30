@@ -57,3 +57,21 @@
 .follow:hover{
     transform: scale(1.1);
 }
+.search-box {
+    width: 100%;
+    max-width: 400px;
+    padding: 10px;
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    font-size: 16px;
+    color: var(--color1);
+    background-color: var(--white);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: border-color 0.3s ease;
+}
+
+.search-box:focus {
+    outline: none;
+    border-color: var(--accent);
+    box-shadow: 0 0 5px rgba(255, 122, 89, 0.5);
+}
