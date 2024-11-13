@@ -13,6 +13,7 @@ export default function Home() {
   const [posts, setPosts] = useState([]);
   const [likedPosts, setLikedPosts] = useState({});
   const [userData, setUserData] = useState(null);
+  const [searchUsername, setSearchUsername] = useState(''); 
 
   const userId = localStorage.getItem('userId');
 
@@ -43,7 +44,6 @@ export default function Home() {
     }
   };
 
-
   useEffect(() => {
     if (userId) {
       axios.get(`https://s56-chinmayee-capstone-mitworking.onrender.com/${userId}`)
@@ -60,20 +60,33 @@ export default function Home() {
     return <div>Loading...</div>;
   }
 
+  const filteredPosts = posts.filter(post => 
+    post.username.toLowerCase().includes(searchUsername.toLowerCase())
+  );
+
   return (
     <>
       <div className='home-box'>
         <Navbar/>
         <Followers/>
 
+        {/* Search input for filtering posts by username */}
+        <input
+          type="text"
+          placeholder="Search by username"
+          value={searchUsername}
+          onChange={(e) => setSearchUsername(e.target.value)}
+          className="search-input"
+        />
+
         {/* Posts container */}
         <div className='posts-container'>
-          {/* Render posts */}
-          {posts.map(post => (
+          {/* Render filtered posts */}
+          {filteredPosts.map(post => (
             <div key={post._id} className='post'>
               <img className='post-img' src={post.image} alt={post.description} />
               <div className='post-icons'>
-              <img className='like-icon post-icon' src={likedPosts[post._id] ? favorite : heart}  alt="heart"  onClick={() => handleLike(post._id)}  />
+                <img className='like-icon post-icon' src={likedPosts[post._id] ? favorite : heart}  alt="heart"  onClick={() => handleLike(post._id)}  />
               </div>
               <h5 className='likes'>{post.likes.length} Likes</h5>
               <div className='caption'>
@@ -103,4 +116,4 @@ export default function Home() {
       </div>
     </>
   );
-}  
+}
