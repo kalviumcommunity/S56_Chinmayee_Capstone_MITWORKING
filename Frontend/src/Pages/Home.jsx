@@ -4,7 +4,7 @@ import Navbar from '../Components/Navbar'
 import Followers from '../Components/Followers'
 import heart from '../assets/heart.png'
 import favorite from '../assets/favorite.png'
-import profile from '../assets/profile3.jpg'
+import profile from '../assets/profile3.png'
 import { Link } from 'react-router-dom'
 import axios from 'axios'
 

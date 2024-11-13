@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import Navbar from '../Components/Navbar'
-import profile from '../assets/default.png'
+import profile from '../assets/profile3.png'
 import Followers from '../Components/Followers'
 import AboutMe from '../Components/AboutMe';
 import MyPosts from '../Components/MyPosts';
